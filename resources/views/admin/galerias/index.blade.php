@@ -38,6 +38,7 @@
                         <tr>
                             <th>Capa</th>
                             <th>Título</th>
+                            <th>Criada em:</th>
                             <th class="text-center">Views</th>
                             <th class="text-center">Imagens</th>
                             <th>Ações</th>
@@ -52,6 +53,7 @@
                                 </a>
                             </td>
                             <td>{{$galeria->titulo}}</td>
+                            <td>{{$galeria->created_at}}</td>
                             <td class="text-center">{{$galeria->views}}</td>
                             <td class="text-center">{{$galeria->countimages()}}</td>                            
                             <td>

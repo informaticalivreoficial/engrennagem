@@ -34,6 +34,7 @@ $config = [
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Painel de Controle</a></li>
+            <li class="breadcrumb-item"><a href="{{route('galerias.index')}}">Galerias</a></li>
             <li class="breadcrumb-item active">Cadastrar Galeria</li>
         </ol>
     </div>

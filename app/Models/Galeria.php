@@ -105,4 +105,12 @@ class Galeria extends Model
             $this->save();
         }
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+        return date('d/m/Y', strtotime($value));
+    }
 }
