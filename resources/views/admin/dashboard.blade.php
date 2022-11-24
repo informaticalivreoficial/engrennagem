@@ -20,13 +20,13 @@
 <div class="row">
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
-            <span class="info-box-icon bg-info"><a href="" title="Reservas"><i class="fa far fa-store"></i></a></span>
+            <span class="info-box-icon bg-success"><a href="{{route('galerias.index')}}" title="Galerias"><i class="fa far fa-images"></i></a></span>
 
             <div class="info-box-content">
-                <span class="info-box-text"><b>Reservas</b></span>
-                <span class="info-box-text">Pendentes: </span>
-                <span class="info-box-text">Finalizada: </span>
-                <span class="info-box-text">Total: </span>
+                <span class="info-box-text"><b>Galerias</b></span>
+                <span class="info-box-text">Ativas: {{ $galeriasAvailable }}</span>
+                <span class="info-box-text">Inativas: {{ $galeriasUnavailable }}</span>
+                <span class="info-box-text">Fotos: {{ $galeriasImages }}</span>
             </div>            
         </div>
     </div>
@@ -44,13 +44,13 @@
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
-            <span class="info-box-icon bg-teal"><a href="{{ route('users.index') }}" title="Clientes"><i class="fa far fa-users"></i></a></span>
+            <span class="info-box-icon bg-teal"><a href="" title="Clientes"><i class="fa far fa-users"></i></a></span>
 
             <div class="info-box-content">
                 <span class="info-box-text"><b>Clientes</b></span>
-                <span class="info-box-text">Ativos: {{ $clientesAvailable }}</span>
-                <span class="info-box-text">Inativos: {{ $clientesUnavailable }}</span>
-                <span class="info-box-text">Total: {{ $clientesAvailable + $clientesUnavailable }}</span>
+                <span class="info-box-text">Ativos: </span>
+                <span class="info-box-text">Inativos: </span>
+                <span class="info-box-text">Total: </span>
             </div>
         </div>
     </div> 

@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Analytics;
-use App\Models\Apartamento;
+use App\Models\Galeria;
+use App\Models\GaleriaGb;
 use App\Models\Newsletter;
 use App\Models\NewsletterCat;
 use Illuminate\Support\Facades\DB;
@@ -23,9 +24,10 @@ class AdminController extends Controller
         $time = User::where('admin', 1)->orWhere('editor', 1)->count();
         $usersAvailable = User::where('client', 1)->available()->count();
         $usersUnavailable = User::where('client', 1)->unavailable()->count();
-        //Clientes
-        $clientesAvailable = User::where('client', 1)->available()->count();
-        $clientesUnavailable = User::where('client', 1)->unavailable()->count();
+        //Galerias
+        $galeriasAvailable = Galeria::available()->count();
+        $galeriasUnavailable = Galeria::unavailable()->count();
+        $galeriasImages = GaleriaGb::count();
         //Newsletter
         // $listas = NewsletterCat::count();
         // $emails = Newsletter::count();
@@ -109,9 +111,10 @@ class AdminController extends Controller
             'paginastotalviews' => $totalViewsPaginas,
             'usersAvailable' => $usersAvailable,
             'usersUnavailable' => $usersUnavailable,
-            //Clientes
-            'clientesAvailable' => $clientesAvailable,
-            'clientesUnavailable' => $clientesUnavailable,
+            //Galerias
+            'galeriasAvailable' => $galeriasAvailable,
+            'galeriasUnavailable' => $galeriasUnavailable,
+            'galeriasImages' => $galeriasImages,
             'postsArtigos' => $postsArtigos,
             'postsNoticias' => $postsNoticias,
             'postsPaginas' => $postsPaginas,

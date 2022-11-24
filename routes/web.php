@@ -191,28 +191,6 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::post('usuarios/store', [UserController::class, 'store'])->name('users.store');
     Route::get('usuarios', [UserController::class, 'index'])->name('users.index');
 
-    /** Avaliações */
-    Route::get('avaliacoes/set-status', [AvaliacaoController::class, 'avaliacoesSetStatus'])->name('avaliacoes.avaliacoesSetStatus');
-    Route::match(['post', 'get'], 'avaliacoes/fetchCity', [AvaliacaoController::class, 'fetchCity'])->name('avaliacoes.fetchCity');
-    Route::get('avaliacoes/delete', [AvaliacaoController::class, 'delete'])->name('avaliacoes.delete');
-    Route::delete('avaliacoes/deleteon', [AvaliacaoController::class, 'deleteon'])->name('avaliacoes.deleteon');
-    Route::put('avaliacoes/{id}', [AvaliacaoController::class, 'update'])->name('avaliacoes.update');
-    Route::get('avaliacoes/{id}/edit', [AvaliacaoController::class, 'edit'])->name('avaliacoes.edit');
-    Route::get('avaliacoes/create', [AvaliacaoController::class, 'create'])->name('avaliacoes.create');
-    Route::post('avaliacoes/store', [AvaliacaoController::class, 'store'])->name('avaliacoes.store');
-    Route::get('avaliacoes', [AvaliacaoController::class, 'index'])->name('avaliacoes.index');
-
-    //****************************** Empresas *******************************************/
-    Route::match(['post', 'get'], 'empresas/fetchCity', [EmpresaController::class, 'fetchCity'])->name('empresas.fetchCity');
-    Route::get('empresas/set-status', [EmpresaController::class, 'empresaSetStatus'])->name('empresas.empresaSetStatus');
-    Route::delete('empresas/deleteon', [EmpresaController::class, 'deleteon'])->name('empresas.deleteon');
-    Route::get('empresas/delete', [EmpresaController::class, 'delete'])->name('empresas.delete');
-    Route::put('empresas/{id}', [EmpresaController::class, 'update'])->name('empresas.update');
-    Route::get('empresas/{id}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
-    Route::get('empresas/create', [EmpresaController::class, 'create'])->name('empresas.create');
-    Route::post('empresas/store', [EmpresaController::class, 'store'])->name('empresas.store');
-    Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas.index');
-
     //****************************** Menu *******************************************/
     Route::get('menus/set-status', [MenuController::class, 'menuSetStatus'])->name('menus.menuSetStatus');
     Route::delete('menus/deleteon', [MenuController::class, 'deleteon'])->name('menus.deleteon');
