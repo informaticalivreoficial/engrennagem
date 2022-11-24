@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\{
     ReservaController,
     SitemapController,
     SlideController,
+    VideoController,
     WhatsappController
 };
 use App\Http\Controllers\Web\RssFeedController;
@@ -212,6 +213,16 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::get('galerias/create', [GaleriaController::class, 'create'])->name('galerias.create');
     Route::post('galerias/store', [GaleriaController::class, 'store'])->name('galerias.store');
     Route::get('/galerias', [GaleriaController::class, 'index'])->name('galerias.index');
+    
+    //****************************** Vídeos *******************************************/
+    Route::get('videos/set-status', [VideoController::class, 'videoSetStatus'])->name('videos.videoSetStatus');
+    Route::delete('videos/deleteon', [VideoController::class, 'deleteon'])->name('videos.deleteon');
+    Route::get('videos/delete', [VideoController::class, 'delete'])->name('videos.delete');
+    Route::put('videos/{id}', [VideoController::class, 'update'])->name('videos.update');
+    Route::get('videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit');
+    Route::get('videos/create', [VideoController::class, 'create'])->name('videos.create');
+    Route::post('videos/store', [VideoController::class, 'store'])->name('videos.store');
+    Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
 
     /** Reservas */
     Route::get('reservas/delete', [ReservaController::class, 'delete'])->name('reservas.delete');
