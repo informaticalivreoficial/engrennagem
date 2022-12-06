@@ -37,6 +37,21 @@ class Renato
     }
 
     /**
+    * <b>Embed:</b> Ao executar este HELPER, é retornado a hash do vídeo
+    * do youtube!
+    * @return HTML = texto informado hash do vídeo!
+    */
+    public static function getYoutubeHash($value) {
+        if(!empty($value)):
+            $pData = explode("v=",$value);
+            return $pData[1];
+            //return count( $pData ) > 0 ? $pData[0] : $value;
+        else:
+            return false;
+        endif;
+    }
+
+    /**
     * <b>Limpa Telefone:</b> Ao executar este HELPER, são eliminados
     * espaços traços e outros caracteres do numero de telefone
     * @return HTML = texto informado número limpo!

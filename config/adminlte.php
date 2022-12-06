@@ -276,6 +276,11 @@ return [
             'icon' => 'fas fa-images',
         ],
         [
+            'text' => 'Vídeos',
+            'url'  => 'admin/videos',
+            'icon' => 'fas fa-video',
+        ],
+        [
             'text' => 'Email',            
             'icon' => 'fas fa-fw fa-envelope',
             'submenu' => [

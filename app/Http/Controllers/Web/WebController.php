@@ -4,24 +4,19 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\Web\Atendimento;
-use App\Mail\Web\AtendimentoRetorno;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\{
-    Apartamento,
     Post,
     CatPost,
     Cidades,
-    Estados,
     Galeria,
     Newsletter,
-    Parceiro,
     Slide,
-    User
+    User,
+    Video
 };
-use App\Services\CidadeService;
+
 use App\Services\ConfigService;
 use App\Services\EstadoService;
 use App\Support\Seo;
@@ -29,7 +24,7 @@ use Carbon\Carbon;
 
 class WebController extends Controller
 {
-    protected $configService, $estadoService, $cidadeService;
+    protected $configService, $estadoService;
     protected $seo;
 
     public function __construct(
@@ -49,21 +44,15 @@ class WebController extends Controller
 
     public function home()
     {
-        $acomodacoes = Apartamento::available()->get();
-        $apartamentos = Apartamento::available()
-                    ->where('exibir_home', 1)
-                    ->inRandomOrder()
-                    ->limit(6)
-                    ->get();
-        $artigos = Post::orderBy('created_at', 'DESC')->where('tipo', 'artigo')
-                    ->postson()
-                    ->limit(6)
+        $videos = Video::orderBy('created_at', 'DESC')
+                    ->available()
+                    ->limit(12)
                     ->get();
         $slides = Slide::orderBy('created_at', 'DESC')
                     ->available()
                     ->where('expira', '>=', Carbon::now())
                     ->get();   
-        $galerias = Galeria::orderBy('created_at', 'DESC')->available()->limit(3)->get();
+        $galerias = Galeria::orderBy('created_at', 'DESC')->available()->limit(12)->get();
         
         $head = $this->seo->render($this->configService->getConfig()->nomedosite ?? 'Informática Livre',
             $this->configService->getConfig()->descricao ?? 'Informática Livre desenvolvimento de sistemas web desde 2005',
@@ -74,9 +63,7 @@ class WebController extends Controller
 		return view('web.'.$this->configService->getConfig()->template.'.home',[
             'head' => $head,            
             'slides' => $slides,
-            'apartamentos' => $apartamentos,
-            'artigos' => $artigos,
-            'acomodacoes' => $acomodacoes,
+            'videos' => $videos,
             'galerias' => $galerias
 		]);
     }

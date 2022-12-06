@@ -318,13 +318,13 @@ $config1 = [
                                 <div class="col-12 col-md-6 col-lg-6"> 
                                     <div class="form-group">
                                         <label class="labelforms"><b>Sound Cloud:</b></label>
-                                        <input type="text" class="form-control text-muted" placeholder="Linkedin" name="soundclound" value="{{old('soundclound') ?? $config->soundclound}}">
+                                        <input type="text" class="form-control text-muted" placeholder="Sound Cloud" name="soundclound" value="{{old('soundclound') ?? $config->soundclound}}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-6"> 
                                     <div class="form-group">
-                                        <label class="labelforms"><b>SnapChat:</b></label>
-                                        <input type="text" class="form-control text-muted" placeholder="SnapChat" name="snapchat" value="{{old('snapchat') ?? $config->snapchat}}">
+                                        <label class="labelforms"><b>Spotify:</b></label>
+                                        <input type="text" class="form-control text-muted" placeholder="Spotify" name="spotify" value="{{old('spotify') ?? $config->spotify}}">
                                     </div>
                                 </div>
                             </div>

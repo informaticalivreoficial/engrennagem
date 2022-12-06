@@ -59,7 +59,7 @@ class Configuracoes extends Model
         'vimeo',
         'fliccr',
         'soundclound',
-        'snapchat',
+        'spotify',
         //Seo
         'descricao',
         'mapa_google',

@@ -218,6 +218,7 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::get('videos/set-status', [VideoController::class, 'videoSetStatus'])->name('videos.videoSetStatus');
     Route::delete('videos/deleteon', [VideoController::class, 'deleteon'])->name('videos.deleteon');
     Route::get('videos/delete', [VideoController::class, 'delete'])->name('videos.delete');
+    Route::get('videos/video', [VideoController::class, 'video'])->name('videos.video');
     Route::put('videos/{id}', [VideoController::class, 'update'])->name('videos.update');
     Route::get('videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit');
     Route::get('videos/create', [VideoController::class, 'create'])->name('videos.create');

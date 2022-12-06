@@ -66,7 +66,7 @@ class CreateConfiguracoesTable extends Migration
             $table->string('vimeo')->nullable();
             $table->string('fliccr')->nullable();
             $table->string('soundclound')->nullable();
-            $table->string('snapchat')->nullable(); 
+            $table->string('spotify')->nullable(); 
             
             /** seo */
             $table->text('descricao')->nullable();

@@ -151,39 +151,7 @@
                                         
                                     </div>
 
-                                    <div id="accordion">   
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h4>                          
-                                                    <a style="border:none;color: #555;" data-toggle="collapse" data-parent="#accordion" href="#collapseRenda">
-                                                        <i class="nav-icon fas fa-plus mr-2"></i> Empresa
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseRenda" class="panel-collapse collapse show">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col-12 col-md-4 col-lg-4"> 
-                                                            <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>*Empresa:</b></label>
-                                                                <select class="form-control" name="empresa">
-                                                                    <option value="" selected>Selecione a Empresa</option> 
-                                                                    @foreach($empresas as $empresa)                                                    
-                                                                        <option value="{{ $empresa->id }}" {{ (old('empresa') == $empresa->id ? 'selected' : ($user->empresa == $empresa->id ? 'selected' : '')) }}>{{ $empresa->alias_name }}</option>                                                   
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-4 col-lg-4"> 
-                                                            <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>Função:</b></label>
-                                                                <input type="text" class="form-control" placeholder="Função" name="funcao" value="{{ old('funcao') ?? $user->funcao }}">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div id="accordion">
                                         <div class="card">
                                             <div class="card-header">
                                                 <h4>

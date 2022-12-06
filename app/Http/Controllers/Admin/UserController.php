@@ -9,7 +9,6 @@ use App\Http\Requests\Admin\User as UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Cidades;
-use App\Models\Empresa;
 use App\Models\Estados;
 use App\Models\User;
 use Carbon\Carbon;
@@ -63,12 +62,10 @@ class UserController extends Controller
     {
         $estados = Estados::orderBy('estado_nome', 'ASC')->get();
         $cidades = Cidades::orderBy('cidade_nome', 'ASC')->get(); 
-        $empresas = Empresa::orderBy('alias_name', 'ASC')->available()->get();      
-
+        
         return view('admin.users.create',[
             'estados' => $estados,
-            'cidades' => $cidades,
-            'empresas' => $empresas
+            'cidades' => $cidades
         ]);
     }
     
@@ -94,15 +91,13 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();   
-        $empresas = Empresa::orderBy('alias_name', 'ASC')->available()->get(); 
         $estados = Estados::orderBy('estado_nome', 'ASC')->get();
         $cidades = Cidades::orderBy('cidade_nome', 'ASC')->get(); 
         
         return view('admin.users.edit', [
             'user' => $user,
             'estados' => $estados,
-            'cidades' => $cidades,
-            'empresas' => $empresas
+            'cidades' => $cidades
         ]);
     }
 
@@ -123,7 +118,6 @@ class UserController extends Controller
 
         if(!empty($request->file('avatar'))){
             Storage::delete($user->avatar);
-            //Cropper::flush($user->avatar);
             $user->avatar = '';
         }
 

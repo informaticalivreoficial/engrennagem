@@ -1,129 +1,144 @@
-.h2sombra{
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+.alertas{
+    text-align: left !important;
 }
-.center{
+#link-inscrevase a{
+
+    color: #000;
+
+}
+
+#link-inscrevase a:hover{
+
+    text-decoration: underline;
+
+}
+
+#fundo-youtube{
+
+    background-image:url(../images/fundo-youtube.jpg);
+
+    height: 110px;
+
+    background-repeat: no-repeat;
+
+}
+.discografiap{
+    background-color: #3b3b3b;
+    height: 40px;
+    margin: 5px 0 0 0;
+    color: #fff;
+    padding: 10px 0 10px 0;
     text-align: center;
 }
-.navbar-brand{
-    padding-top: 8px !important;
+.discografiap span{
+    margin: 0 10px 0 10px;
 }
-.fa-spin{
-    color: #B2B2B2;
-    font-size: 30px;
+.discografiap a{
+    color: #fff;
 }
-.whatsapp-footer{
-    width: 64px;
-    display: block;
-    position: fixed;
-    bottom: 40px;
-    left: 20px;
+.discografiap a:hover{
+    color: #fff;
+    text-decoration: underline;
+}
+.fancybox-inner{
+    margin-top: 25px;
+}
+
+
+/*MODAL DE CARREGAMENTO DO SISTEMA*/
+.dialog{
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10050;
+    outline: 0;    
+    display: none;  
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);  
+}
+.dialog .loadsistem{
+    vertical-align: middle;
+    max-width: 800px;
+    padding-bottom: 20px;
+    height:auto;
     text-align: center;
-    padding-top: 10px;
-    z-index: 999;
-}
-.balao{
-    display:none;
-    padding: 8px;
-    bottom: 130px;
-    left: 10px;
-    position: fixed;
     background: #fff;
-	border-radius: 15px;
-	width: 200px;
-	height: 130px;
-    z-index: 999;
-    box-shadow: 2px 2px 4px #000000;
+    left: 20px;
+    right: 20px;
+    margin: 0 auto;    
+    top: 5%;
+    z-index: 10051;
+    
 }
-.balao:after{
-	content: "";
-	width: 0;
-	height: 0;
-	position: absolute;
-	border-left: 20px solid transparent;
-	border-right: 20px solid transparent;
-	border-top: 20px solid #fff;	
-	bottom: -20px;
-	left: 20%;
+.dialog .loadsistem{font-weight: bold;color: #555;font-size: 14px;}
+.dialog .loadsistem img{margin-bottom: 8px;}
+.dialog-topo{
+    height: 218px;
+    padding-top: 40px;
+    background: url(../images/modal/overlay_head-.jpg) center top no-repeat;
 }
-.balao textarea{
-    width: 100%;
-    height: 85px;
-    resize: none;
-    border: none;
+.dialog-topo h3 {
+    font-size: 35px;
+    font-weight: 500;
+    font-family: 'Roboto',sans-serif;
+    color: #fff;
+    margin: 0 0 15px;    
 }
-.balao button{
-    box-shadow: none;
-    border-radius: 5px;
-    float: right;
+.dialog-topo p {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Roboto',sans-serif;    
+    margin: 0 0 21px;
 }
-.alertw{
-    left: 13px;
-    bottom: 250px;
-    display: block;
-    position: fixed;
-    z-index: 999;
+
+.formmodal{
+    padding: 10px 40px 0 40px;
+    margin-bottom: 0px;
 }
-.selectReservas{
-    border: 2px solid #333333;
-    border-radius: 0px;
-    height: 42px;
-    line-height: 37px;
-    margin-bottom: 15px;
-    display: block;
-    width: 100%;
-    padding: 6px 12px;
-    font-size: 14px;
-    color: #555555;
-    background-color: #fff;
+
+.formmodal label{
+    text-align: left;
+    width: 100%;    
 }
-.btncheckout{
-    width: 100%;
-    height: 42px;
-    font-size: 16px;
-    color: #ffffff;
-    background: #8E7037;
-    line-height: 40px;
-    border:none;
-    font-weight: 600;
-}
-.btncheckout:hover{
-    border: 2px solid #8E7037;
-    background: transparent;
-    color: #8E7037;
-}
-.selectindex{
-    font-size: 55px;
-    background-color: #fff;
-    border: none;
-}
-.btnindex{
-    text-align: center !important;
-    font-weight: 600;
-    width: 100%;
-    font-size: 14px;
+
+.modal-btn{
+    font-size: 1em;
+    color: #fff;
+    border-radius: 4px;    
+    padding: 10px 20px;
+    font-family: roboto;
+    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    padding-top: 45px;
-    color: white;
-    cursor: pointer;
-    background:none;
-    border: none;
+    transition: .5s;
+    border-width: 0px;
 }
-.a404{
-    color:#3366FF;
+.btnsuccess{
+   background: #99c14e; 
 }
-.principal{
-    width: 95%;
+.btnfechar{
+   background: #568089; 
 }
-.principal > div {
-    width:33%;
-    position:relative;
-    float:left;    
+.formmodal input[type="text"],input[type="email"]{
+    background-color: transparent;
+    border-color: rgba(255,255,255,.1);
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-.itr img{
-    width: auto !important;
-    height: auto !important; 
+.modalfooter{
+    text-align: right;
 }
-.temp{
-    font-size: 1.1em;
+.hiddemmodal{
+    display: none;
+}
+/*UNSUBSCRIB*/
+.unsubscrib{
+    width: 100%;
+    text-align: center;
 }
