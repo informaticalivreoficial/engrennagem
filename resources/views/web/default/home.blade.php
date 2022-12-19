@@ -102,7 +102,7 @@
 @endif
 
 <section id="contato">
-    <div class="light-wrapper" style="background-image: url({{url('frontend/assets/images/contact-bg.jpg')}});color:#000;background-repeat:no-repeat;background-size: cover;background-position:center;">  
+    <div class="light-wrapper" style="background-image: url({{url('frontend/'.$configuracoes->template.'/assets/images/contact-bg.jpg')}});color:#000;background-repeat:no-repeat;background-size: cover;background-position:center;">  
         <div class="container inner">   
             <div class="divide10"></div>  
             <div class="row">
@@ -115,18 +115,20 @@
   
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="fb-page" data-href="<?= FACEBOOK;?>" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="true">
-                        <blockquote cite="<?= FACEBOOK;?>" class="fb-xfbml-parse-ignore">
-                            <a href="<?= FACEBOOK;?>">Engrennagem</a>
-                        </blockquote>
-                    </div>
-                </div>
-    
+                    @if ($configuracoes->facebook)
+                        <div class="fb-page" data-href="{{$configuracoes->facebook}}" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="{{$configuracoes->facebook}}" class="fb-xfbml-parse-ignore">
+                                <a href="{{$configuracoes->facebook}}">Engrennagem</a>
+                            </blockquote>
+                        </div>
+                    @endif                    
+                </div>    
                 <div class="col-sm-4">
-                    <a class="twitter-timeline" href="<?= TWITTER;?>" height="359">Tweets by Engrennagem</a>
-                    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-    
+                    @if ($configuracoes->twitter)
+                        <a class="twitter-timeline" href="{{$configuracoes->twitter}}" height="359">Tweets by Engrennagem</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    @endif                    
+                </div>    
                 <div class="col-sm-4">    
                 
                 </div>
@@ -138,64 +140,40 @@
                 <div class="col-sm-8" id="fundo-youtube">
                     <script src="https://apis.google.com/js/platform.js"></script>
                     <div class="g-ytsubscribe" data-channelid="UCB_RfNRIJNnrzwsbfJXvG4w" data-layout="full" data-theme="dark" data-count="default"></div>
-                </div>
-    
+                </div>    
                 <div class="col-sm-4">
                     <iframe width="100%" height="110" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/38680885&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
                 </div>
-            </div>
-  
-        
-         <?php
-             $readParceiros = read('parceiros',"WHERE status = '1' ORDER BY data DESC");
-             foreach($readParceiros as $parceiro1);
-             if($parceiro1){
-                  echo '
-                  <div class="divide10"></div>
-                     <div class="row">
-                          <div class="col-sm-12" style="margin-top: 30px;">
-                              <h2 style="text-align:center">Parceiros</h2>            
-                          </div>
-                     </div>
-                     
-                     
-                     <div class="divide10"></div>
-                    <div class="row">
-                  ';
-                  foreach($readParceiros as $parceiro):
-                      echo '
-                      <div class="col-sm-2">
-                        <div class="caption-overlay">
-                          <figure style="margin-bottom:10px;">
-                      ';
-                      if($parceiro['link'] == ''){
-                         echo '<a class="fancybox-media" href="#">'; 
-                      }else{
-                         echo '<a class="fancybox-media" target="_blank" href="'.$parceiro['link'].'">'; 
-                      }
-                      $pasta 	= ''.BASE.'/uploads/parceiros/';
-                      if(file_exists($pasta.$parceiro['img']) && !is_dir($pasta.$parceiro['img'])){
-                          echo '<img src="'.PATCH.'/images/image.jpg" alt="'.$parceiro['nome'].'">';
-                      }else{
-                          echo '<img src="'.BASE.'/uploads/parceiros/'.$parceiro['img'].'" alt="'.$parceiro['nome'].'" title="'.$parceiro['nome'].'">';
-                      }
-                      echo '    
-                           </a>
-                          </figure>                         
-                        </div>
-                      </div>
-                      ';                
-                  endforeach;
-                  echo '
-                  </div>
-                  ';
-             }
-  
-          ?> 
-  
-      </div>
-    </div>
-  
+            </div>  
+
+            @if (!empty($parceiros) && $parceiros->count() > 0)
+                <div class="divide10"></div>
+                <div class="row">
+                    <div class="col-sm-12" style="margin-top: 30px;">
+                        <h2 style="text-align:center">Parceiros</h2>            
+                    </div>
+                </div>
+                <div class="divide10"></div>
+                <div class="row">
+                    @foreach($parceiros as $parceiro)
+                        <div class="col-sm-2">
+                            <div class="caption-overlay">
+                                <figure style="margin-bottom:10px;">
+                                    @if($parceiro->link == '')
+                                        <a class="fancybox-media" href="#"> 
+                                    @else
+                                        <a class="fancybox-media" target="_blank" href="{{$parceiro->link}}"> 
+                                    @endif
+                                    <img src="{{$parceiro->cover()}}" alt="{{$parceiro->name}}">                                  
+                                    </a>
+                                </figure>                         
+                            </div>
+                        </div>           
+                    @endforeach
+                </div>
+            @endif         
+        </div>
+    </div>  
 </section> 
 
 @endsection

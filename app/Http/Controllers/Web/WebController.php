@@ -12,6 +12,7 @@ use App\Models\{
     Cidades,
     Galeria,
     Newsletter,
+    Parceiro,
     Slide,
     User,
     Video
@@ -53,6 +54,7 @@ class WebController extends Controller
                     ->where('expira', '>=', Carbon::now())
                     ->get();   
         $galerias = Galeria::orderBy('created_at', 'DESC')->available()->limit(12)->get();
+        $parceiros = Parceiro::orderBy('created_at', 'DESC')->available()->limit(4)->get();
         
         $head = $this->seo->render($this->configService->getConfig()->nomedosite ?? 'Informática Livre',
             $this->configService->getConfig()->descricao ?? 'Informática Livre desenvolvimento de sistemas web desde 2005',
@@ -64,7 +66,8 @@ class WebController extends Controller
             'head' => $head,            
             'slides' => $slides,
             'videos' => $videos,
-            'galerias' => $galerias
+            'galerias' => $galerias,
+            'parceiros' => $parceiros
 		]);
     }
 

@@ -63,6 +63,11 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     //*************************************** Galerias *******************************************/
     Route::get('/galeria/{slug}', [WebController::class, 'galeria'])->name('galeria');
     Route::get('/galerias', [WebController::class, 'galerias'])->name('galerias');
+
+    //****************************** Parceiros *********************************************/
+    Route::get('/sendEmailParceiro', [SendEmailController::class, 'sendEmailParceiro'])->name('sendEmailParceiro');
+    Route::get('/parceiro/{slug}', [WebController::class, 'parceiro'])->name('parceiro');
+    Route::get('/parceiros', [WebController::class, 'parceiros'])->name('parceiros');
     
     //** Pesquisa */
     Route::match(['post', 'get'], '/pesquisa', [WebController::class, 'pesquisa'])->name('pesquisa');
@@ -225,28 +230,7 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::post('videos/store', [VideoController::class, 'store'])->name('videos.store');
     Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
 
-    /** Reservas */
-    Route::get('reservas/delete', [ReservaController::class, 'delete'])->name('reservas.delete');
-    Route::delete('reservas/deleteon', [ReservaController::class, 'deleteon'])->name('reservas.deleteon');
-    Route::put('reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
-    Route::get('reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
-    Route::get('reservas/create', [ReservaController::class, 'create'])->name('reservas.create');
-    Route::get('reservas-pendentes', [ReservaController::class, 'pendentes'])->name('reservas.pendentes');
-    Route::get('reservas-finalizadas', [ReservaController::class, 'finalizadas'])->name('reservas.finalizadas');
-
-    /** Apartamentos */
-    Route::get('apartamentos/marcadagua', [ApartamentoController::class, 'imageWatermark'])->name('apartamentos.marcadagua');
-    Route::get('apartamentos/delete', [ApartamentoController::class, 'delete'])->name('apartamentos.delete');
-    Route::delete('apartamentos/deleteon', [ApartamentoController::class, 'deleteon'])->name('apartamentos.deleteon');
-    Route::post('apartamentos/image-set-cover', [ApartamentoController::class, 'imageSetCover'])->name('apartamentos.imageSetCover');
-    Route::get('apartamentos/set-status', [ApartamentoController::class, 'apartamentoSetStatus'])->name('apartamentos.SetStatus');
-    Route::delete('apartamentos/image-remove', [ApartamentoController::class, 'imageRemove'])->name('apartamentos.imageRemove');
-    Route::put('apartamentos/{id}', [ApartamentoController::class, 'update'])->name('apartamentos.update');
-    Route::get('apartamentos/{id}/edit', [ApartamentoController::class, 'edit'])->name('apartamentos.edit');
-    Route::get('apartamentos/create', [ApartamentoController::class, 'create'])->name('apartamentos.create');
-    Route::post('apartamentos/store', [ApartamentoController::class, 'store'])->name('apartamentos.store');
-    Route::get('apartamentos', [ApartamentoController::class, 'index'])->name('apartamentos.index');
-
+    
     //******************** Sitemap *********************************************/
     Route::get('gerarxml', [SitemapController::class, 'gerarxml'])->name('gerarxml');
 

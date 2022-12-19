@@ -281,6 +281,11 @@ return [
             'icon' => 'fas fa-video',
         ],
         [
+            'text' => 'Parceiros',
+            'url'  => 'admin/parceiros',
+            'icon' => 'fas fa-puzzle-piece',
+        ],
+        [
             'text' => 'Email',            
             'icon' => 'fas fa-fw fa-envelope',
             'submenu' => [
