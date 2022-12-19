@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     AdminController,
+    AgendaController,
     ApartamentoController,
     AvaliacaoController,
     UserController,
@@ -206,6 +207,16 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::get('menus/create', [MenuController::class, 'create'])->name('menus.create');
     Route::post('menus/store', [MenuController::class, 'store'])->name('menus.store');
     Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
+
+    //****************************** Agenda *******************************************/
+    Route::get('agenda/set-status', [AgendaController::class, 'agendaSetStatus'])->name('agenda.agendaSetStatus');
+    Route::delete('agenda/deleteon', [AgendaController::class, 'deleteon'])->name('agenda.deleteon');
+    Route::get('agenda/delete', [AgendaController::class, 'delete'])->name('agenda.delete');
+    Route::put('agenda/{id}', [AgendaController::class, 'update'])->name('agenda.update');
+    Route::get('agenda/{id}/edit', [AgendaController::class, 'edit'])->name('agenda.edit');
+    Route::get('agenda/create', [AgendaController::class, 'create'])->name('agenda.create');
+    Route::post('agenda/store', [AgendaController::class, 'store'])->name('agenda.store');
+    Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
 
     //****************************** Galerias *******************************************/
     Route::get('galerias/set-status', [GaleriaController::class, 'galeriaSetStatus'])->name('galerias.galeriaSetStatus');

@@ -13,8 +13,19 @@ class CreateAgendasTable extends Migration
      */
     public function up()
     {
-        Schema::create('agendas', function (Blueprint $table) {
-            $table->id();
+        Schema::create('agenda', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('titulo');
+            $table->text('content')->nullable();
+            $table->string('link')->nullable();
+            $table->string('url')->nullable();
+            $table->string('thumb')->nullable();
+            $table->string('endereco')->nullable();
+            $table->string('time')->nullable();
+            $table->date('data')->nullable();
+            $table->integer('status')->nullable();
+            $table->bigInteger('cliques')->default(0);
+            
             $table->timestamps();
         });
     }
@@ -26,6 +37,6 @@ class CreateAgendasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agendas');
+        Schema::dropIfExists('agenda');
     }
 }

@@ -276,6 +276,20 @@ return [
             'icon' => 'fas fa-images',
         ],
         [
+            'text' => 'Agenda',            
+            'icon' => 'fas fa-fw fa-newspaper',
+            'submenu' => [
+                [
+                    'text' => 'Listar Eventos',
+                    'url'  => 'admin/agenda',
+                ],
+                [
+                    'text' => 'Criar Novo',
+                    'url'  => 'admin/agenda/create',
+                ]
+            ]
+        ],
+        [
             'text' => 'Vídeos',
             'url'  => 'admin/videos',
             'icon' => 'fas fa-video',
