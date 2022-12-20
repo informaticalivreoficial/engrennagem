@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class VideoRequest extends FormRequest
+class NewsletterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class VideoRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -24,9 +23,11 @@ class VideoRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->segment(4);
+
         return [
-            'titulo' => ['required', 'min:3', 'max:255'],
-            'content' => 'nullable|min:3'
+            'nome' => ['required', 'string', 'min:3', 'max:191'],
+            'email' => ['required', 'string', 'email', 'min:3', 'max:191', "unique:newsletter,email,{$id},id"],
         ];
     }
 }

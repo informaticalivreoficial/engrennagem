@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class VideoRequest extends FormRequest
+class NewsletterCatRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class VideoRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -25,8 +24,7 @@ class VideoRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo' => ['required', 'min:3', 'max:255'],
-            'content' => 'nullable|min:3'
+            'titulo' => 'required|min:3|max:191',
         ];
     }
 }

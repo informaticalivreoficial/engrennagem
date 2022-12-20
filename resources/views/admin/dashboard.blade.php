@@ -32,25 +32,25 @@
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
-            <span class="info-box-icon bg-info"><a href="" title="Apartamentos"><i class="fa far fa-building"></i></a></span>
+            <span class="info-box-icon bg-info"><a href="{{route('videos.index')}}" title="Vídeos"><i class="fa far fa-video"></i></a></span>
 
             <div class="info-box-content">
-                <span class="info-box-text"><b>Apartamentos</b></span>
-                <span class="info-box-text">Publicado: </span>
-                <span class="info-box-text">Rascunho: </span>
-                <span class="info-box-text">Total: </span>
+                <span class="info-box-text"><b>Vídeos</b></span>
+                <span class="info-box-text">Publicado: {{ $videosAvailable }}</span>
+                <span class="info-box-text">Rascunho: {{ $videosUnavailable }}</span>
+                <span class="info-box-text">Total: {{ $videosAvailable + $videosUnavailable }}</span>
             </div>            
         </div>
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
-            <span class="info-box-icon bg-teal"><a href="" title="Clientes"><i class="fa far fa-users"></i></a></span>
+            <span class="info-box-icon bg-teal"><a href="{{route('agenda.index')}}" title="Eventos"><i class="fa far fa-newspaper"></i></a></span>
 
             <div class="info-box-content">
-                <span class="info-box-text"><b>Clientes</b></span>
-                <span class="info-box-text">Ativos: </span>
-                <span class="info-box-text">Inativos: </span>
-                <span class="info-box-text">Total: </span>
+                <span class="info-box-text"><b>Eventos</b></span>
+                <span class="info-box-text">Publicado: {{ $eventoAvailable }}</span>
+                <span class="info-box-text">Rascunho: {{ $eventoUnavailable }}</span>
+                <span class="info-box-text">Total: {{ $eventoAvailable + $eventoUnavailable }}</span>
             </div>
         </div>
     </div> 
@@ -234,7 +234,7 @@
                     <td class="text-center">
                       <span class="badge bg-primary">{{$artigotop->views}}</span>
                       <a data-toggle="tooltip" data-placement="top" title="Editar Artigo" href="{{route('posts.edit', ['id' => $artigotop->id])}}" class="btn btn-xs btn-default ml-2"><i class="fas fa-pen"></i></a>
-                      <a target="_blank" href="{{route('web.blog.artigo',['slug' => $artigotop->slug])}}" class="btn btn-xs btn-info text-white"><i class="fas fa-search"></i></a>
+                      <a target="_blank" href="" class="btn btn-xs btn-info text-white"><i class="fas fa-search"></i></a>
                     </td>
                 </tr>
                 @endforeach                            

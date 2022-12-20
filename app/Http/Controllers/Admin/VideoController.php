@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\VideoRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
@@ -27,34 +28,34 @@ class VideoController extends Controller
         ]);
     }
 
-    // public function store(VideoRequest $request)
-    // {
-    //     $criarGaleria = Galeria::create($request->all());
-    //     $criarGaleria->fill($request->all());
-    //     $criarGaleria->setSlug();
-
-    //     $validator = Validator::make($request->only('files'), ['files.*' => 'image']);
-
-    //     if ($validator->fails() === true) {
-    //         return redirect()->back()->withInput()->with([
-    //             'color' => 'orange',
-    //             'message' => 'Todas as imagens devem ser do tipo jpg, jpeg ou png.',
-    //         ]);
-    //     }
+    public function store(VideoRequest $request)
+    {
+        $videoCreate = Video::create($request->all());
+        $videoCreate->fill($request->all());
+        $videoCreate->setSlug();
         
-    //     if ($request->allFiles()) {
-    //         foreach ($request->allFiles()['files'] as $image) {
-    //             $galeriaGb = new GaleriaGb();
-    //             $galeriaGb->galeria = $criarGaleria->id;
-    //             $galeriaGb->path = $image->storeAs(env('AWS_PASTA') . 'galerias/' . $criarGaleria->id, Str::slug($request->titulo) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
-    //             $galeriaGb->save();
-    //             unset($galeriaGb);
-    //         }
-    //     }
-    //     return redirect()->route('galerias.edit', [
-    //         'id' => $criarGaleria->id,
-    //     ])->with(['color' => 'success', 'message' => 'Galeria cadastrada com sucesso!']);
-    // }
+        return redirect()->route('videos.edit', [
+            'id' => $videoCreate->id,
+        ])->with(['color' => 'success', 'message' => 'Vídeo cadastrado com sucesso!']);
+    }
+
+    public function edit($id)
+    {
+        $video = Video::where('id', $id)->first();                
+        return view('admin.videos.edit', ['video' => $video]);
+    }
+
+    public function update(VideoRequest $request, $id)
+    {
+        $video = Video::where('id', $id)->first();
+        $video->fill($request->all());
+        $video->save();
+        $video->setSlug();
+        
+        return redirect()->route('videos.edit', [
+            'id' => $video->id,
+        ])->with(['color' => 'success', 'message' => 'Vídeo atualizado com sucesso!']);
+    }
 
     public function video(Request $request)
     {
@@ -65,5 +66,41 @@ class VideoController extends Controller
                 'embed' => $video->embed
             ]);
         }
+    }
+
+    public function videoSetStatus(Request $request)
+    {        
+        $video = Video::find($request->id);
+        $video->status = $request->status;
+        $video->save();
+        return response()->json(['success' => true]);
+    }
+
+    public function delete(Request $request)
+    {
+        $videodelete = Video::where('id', $request->id)->first();
+        $nome = \App\Helpers\Renato::getPrimeiroNome(Auth::user()->name);
+
+        if(!empty($videodelete)){
+            $json = "<b>$nome</b> você tem certeza que deseja excluir este Vídeo?";
+            return response()->json(['error' => $json,'id' => $videodelete->id]);            
+        }else{
+            return response()->json(['error' => 'Erro ao excluir']);
+        }       
+    }
+
+    public function deleteon(Request $request)
+    {
+        $videodelete = Video::where('id', $request->video_id)->first();  
+        $postR = $videodelete->titulo;
+
+        if(!empty($videodelete)){            
+            $videodelete->delete();
+        }
+
+        return redirect()->route('videos.index')->with([
+            'color' => 'success', 
+            'message' => 'O vídeo '.$postR.' foi removido com sucesso!'
+        ]);        
     }
 }

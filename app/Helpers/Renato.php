@@ -44,8 +44,7 @@ class Renato
     public static function getYoutubeHash($value) {
         if(!empty($value)):
             $pData = explode("v=",$value);
-            return $pData[1];
-            //return count( $pData ) > 0 ? $pData[0] : $value;
+            return count( $pData ) > 1 ? $pData[1] : $value;
         else:
             return false;
         endif;

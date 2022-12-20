@@ -44,6 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
+                                    {{$video->titulo}}
                                     <div class="text-right"> 
                                         <input type="checkbox" data-onstyle="success" data-offstyle="warning" data-size="mini" class="toggle-class" data-id="{{ $video->id }}" data-toggle="toggle" data-style="slow" data-on="<i class='fas fa-check'></i>" data-off="<i style='color:#fff !important;' class='fas fa-exclamation-triangle'></i>" {{ $video->status == true ? 'checked' : ''}}>
                                         @if(\Illuminate\Support\Facades\Auth::user()->admin == true || \Illuminate\Support\Facades\Auth::user()->superadmin == true)
@@ -76,6 +77,31 @@
       </div>
       <!-- /.card -->
 </section>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="frm" action="" method="post">            
+            @csrf
+            @method('DELETE')
+            <input id="id_video" name="video_id" type="hidden" value=""/>
+                <div class="modal-header">
+                    <h4 class="modal-title">Remover Vídeo!</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span class="j_param_data"></span>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
+                    <button type="submit" class="btn btn-primary">Excluir Agora</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <div class="modal fade" id="modal-video">
@@ -182,22 +208,22 @@
 
             //FUNÇÃO PARA EXCLUIR
             $('.j_modal_btn').click(function() {
-                var galeria_id = $(this).data('id');
+                var video_id = $(this).data('id');
                 
                 $.ajax({
                     type: 'GET',
                     dataType: 'JSON',
-                    url: "{{ route('galerias.delete') }}",
+                    url: "{{ route('videos.delete') }}",
                     data: {
-                       'id': galeria_id
+                       'id': video_id
                     },
                     success:function(data) {
                         if(data.error){
                             $('.j_param_data').html(data.error);
-                            $('#id_galeria').val(data.id);
-                            $('#frm').prop('action','{{ route('galerias.deleteon') }}');
+                            $('#id_video').val(data.id);
+                            $('#frm').prop('action','{{ route('videos.deleteon') }}');
                         }else{
-                            $('#frm').prop('action','{{ route('galerias.deleteon') }}');
+                            $('#frm').prop('action','{{ route('videos.deleteon') }}');
                         }
                     }
                 });
@@ -217,14 +243,14 @@
             
             $('.toggle-class').on('change', function() {
                 var status = $(this).prop('checked') == true ? 1 : 0;
-                var galeria_id = $(this).data('id');
+                var video_id = $(this).data('id');
                 $.ajax({
                     type: 'GET',
                     dataType: 'JSON',
-                    url: '{{ route('galerias.galeriaSetStatus') }}',
+                    url: '{{ route('videos.videoSetStatus') }}',
                     data: {
                         'status': status,
-                        'id': galeria_id
+                        'id': video_id
                     },
                     success:function(data) {
                         

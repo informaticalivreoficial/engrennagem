@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Analytics;
+use App\Models\Agenda;
 use App\Models\Galeria;
 use App\Models\GaleriaGb;
 use App\Models\Newsletter;
 use App\Models\NewsletterCat;
+use App\Models\Video;
 use Illuminate\Support\Facades\DB;
 use Spatie\Analytics\Period;
 
@@ -28,6 +30,9 @@ class AdminController extends Controller
         $galeriasAvailable = Galeria::available()->count();
         $galeriasUnavailable = Galeria::unavailable()->count();
         $galeriasImages = GaleriaGb::count();
+        //Vídeos
+        $videosAvailable = Video::available()->count();
+        $videosUnavailable = Video::unavailable()->count();
         //Newsletter
         // $listas = NewsletterCat::count();
         // $emails = Newsletter::count();
@@ -36,21 +41,9 @@ class AdminController extends Controller
         $postsArtigos = Post::where('tipo', 'artigo')->count();
         $postsPaginas = Post::where('tipo', 'pagina')->count();
         $postsNoticias = Post::where('tipo', 'noticia')->count();
-        //Apartamentos
-        // $apartamentosAvailable = Apartamento::available()->count();
-        // $apartamentosUnavailable = Apartamento::unavailable()->count();
-        // $apartamentosTop = Apartamento::orderBy('views', 'DESC')
-        //         ->limit(6)
-        //         ->available()   
-        //         ->get();                
-        // $totalViewsApartamentos = Apartamento::orderBy('views', 'DESC')
-        //         ->available()
-        //         ->limit(6)
-        //         ->get()
-        //         ->sum('views');        
-        //Artigos
-        $artigosAvailable = Post::postson()->where('tipo', 'artigo')->count();
-        $artigosUnavailable = Post::postsoff()->where('tipo', 'artigo')->count();
+        //Eventos
+        $eventoAvailable = Agenda::available()->count();
+        $eventoUnavailable = Agenda::unavailable()->count();
         $artigosTop = Post::orderBy('views', 'DESC')
                 ->where('tipo', 'artigo')
                 ->limit(6)
@@ -96,14 +89,12 @@ class AdminController extends Controller
         //     'emails' => $emails,
         //     'emailsCount' => $emailsCount->sum('count'),
             'time' => $time,
-            //Notícias
-        //     'apartamentosAvailable' => $apartamentosAvailable,
-        //     'apartamentosUnavailable' => $apartamentosUnavailable,
-        //     'apartamentosTop' => $apartamentosTop,
-        //     'apartamentostotalviews' => $totalViewsApartamentos,
-            //Artigos
-            'artigosAvailable' => $artigosAvailable,
-            'artigosUnavailable' => $artigosUnavailable,
+            //Vídeos
+            'videosAvailable' => $videosAvailable,
+            'videosUnavailable' => $videosUnavailable,
+            //Eventos
+            'eventoAvailable' => $eventoAvailable,
+            'eventoUnavailable' => $eventoUnavailable,
             'artigosTop' => $artigosTop,
             'artigostotalviews' => $totalViewsArtigos,
             //Páginas
