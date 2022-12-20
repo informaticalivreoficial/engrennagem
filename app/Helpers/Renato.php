@@ -145,4 +145,29 @@ class Renato
         return true;
     }
 
+    /*****************************
+    Função para Gerar thumbs de vídeos
+    *****************************/
+    // $tipo aceita: default, 0, 1, 2 e 3 como parâmetro
+    public static function imagemYouTube($url, $tipo = 0){
+        // cria um array com várias informações da url
+        $yt_link = parse_url($url);
+        // verifica se no array existe a chave query
+        // e verifica se o parâmetro $tipo é aceito
+        if (isset($yt_link['query']) && in_array($tipo, array(0,1,2,3,'default'))){
+            // transforma a querystring em um array associativo
+            parse_str($yt_link['query'], $video);
+            // verifica se tem a chave v no array $video
+            if (isset($video['v'])){
+                // retorna o link da imagem de acordo com o tipo
+                return 'http://i1.ytimg.com/vi/'.$video['v'].'/'.$tipo.'.jpg';
+            }
+        }
+        // retorna false. Pode ser trocado por um link
+        // de uma imagem padrão
+        // use como abaixo para isso
+        // return 'http://endereco-da-imagem-padrao/imagem.jpg';
+        return false;
+    }
+
 }

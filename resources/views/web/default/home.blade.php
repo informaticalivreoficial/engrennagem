@@ -64,6 +64,85 @@
     </section>
 @endif
 
+@if (!empty($discografia) && $discografia->count() > 0)
+    <section id="discografia"> 
+        <div class="light-wrapper" style="background-image: url({{url('frontend/'.$configuracoes->template.'/assets/images/discografiabg.png')}});color:#000;background-repeat:no-repeat;background-size:cover;background-position:center;padding-top: 100px;padding-bottom: 50px;">
+            <div class="container inner" >
+                <div class="divide10"></div> 
+                <div class="row" >  
+                    @foreach($discografia as $disco)  
+                        <div class="col-sm-4" style="padding-top:26px;">                      
+                            <div style="text-align:center !important;margin-left:35px !important;">                      
+                                <div class="col-sm-2 col-xs-2" style="padding:0 9px 10px 5px;text-align:center;">
+                                    @if($disco->deezer)
+                                        <a style="padding:10px" title="Deezer" href="{{$disco->deezer}}" target="_blank">
+                                            <img src="{{url('frontend/'.$configuracoes->template.'/assets/images/deezer.png')}}" alt="{{url('frontend/'.$configuracoes->template.'/assets/images/deezer.png')}}" />
+                                        </a>
+                                    @endif
+                                </div>                      
+                                <div class="col-sm-2 col-xs-2" style="padding:0 9px 10px 5px;text-align:center;">
+                                    @if($disco->music)
+                                        <a style="padding:10px" title="Music" href="{{$disco->music}}" target="_blank">
+                                            <img src="{{url('frontend/'.$configuracoes->template.'/assets/images/music.png')}}" alt="{{url('frontend/'.$configuracoes->template.'/assets/images/music.png')}}" />
+                                        </a>
+                                    @endif
+                                </div>                      
+                                <div class="col-sm-2 col-xs-2" style="padding:0 9px 10px 5px;text-align:center;">
+                                    @if($disco->spotify)
+                                        <a style="padding:10px" title="Spotify" href="{{$disco->spotify}}" target="_blank">
+                                            <img src="{{url('frontend/'.$configuracoes->template.'/assets/images/spotify.png')}}" alt="{{url('frontend/'.$configuracoes->template.'/assets/images/spotify.png')}}" />
+                                        </a>
+                                    @endif
+                                </div>                      
+                                <div class="col-sm-2 col-xs-2" style="padding:0 9px 10px 5px;text-align:center;">
+                                    @if($disco->itunes)
+                                        <a style="padding:10px" title="Itunes" href="{{$disco->itunes}}" target="_blank">
+                                            <img src="{{url('frontend/'.$configuracoes->template.'/assets/images/itunes.png')}}" alt="{{url('frontend/'.$configuracoes->template.'/assets/images/itunes.png')}}" />
+                                        </a>
+                                    @endif
+                                </div>                      
+                                <div class="col-sm-2 col-xs-2" style="padding:0 9px 10px 5px;text-align:center;">
+                                    @if($disco->apple_music)
+                                        <a style="padding:10px" title="Apple Music" href="{{$disco->apple_music}}" target="_blank">
+                                            <img src="{{url('frontend/'.$configuracoes->template.'/assets/images/applemusic.png')}}" alt="{{url('frontend/'.$configuracoes->template.'/assets/images/applemusic.png')}}" />
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>                      
+                      
+                            <a class="fancybox-media" data-rel="4{{$disco->id}}" href="{{$disco->cover()}}" rel="4{{$disco->id}}">
+                                <img src="{{$disco->cover()}}" alt="{{$disco->titulo}}">
+                            </a>
+                      
+                            <p class="discografiap">
+                                @if($disco->ficha_tecnica)
+                                        <a class="fancybox-media" data-rel="2{{$disco->id}}" href="#2{{$disco->id}}" rel="2{{$disco->id}}">
+                                            <span>Ficha Técnica</span>
+                                        </a>
+                                @endif
+                                @if($disco->letras)
+                                    <a class="fancybox-media" data-rel="3{{$disco->id}}" href="#3{{$disco->id}}" rel="3{{$disco->id}}">
+                                        <span>Letras</span>
+                                    </a>
+                                @endif
+                                @if($disco->link)
+                                    <a target="_blank" href="{{$disco->link}}">
+                                        <span>Ouça o CD</span>
+                                    </a>
+                                @endif                    
+                            </p>
+                        </div>
+  
+                        <div class="col-sm-12" id="2{{$disco->id}}" style="display:none;">{!!$disco->ficha_tecnica!!}</div>
+                        <div class="col-sm-12" id="3{{$disco->id}}" style="display:none;">{{$disco->letras}}</div>
+                        <img style="display:none;" src="{{$disco->cover()}}" alt="{{$disco->titulo}}">
+                    @endforeach
+                </div>
+            </div>  
+        </div>  
+    </section>    
+@endif
+
 @if (!empty($videos) && $videos->count() > 0)
     <section id="videos">
         <div class="light-wrapper">
@@ -74,25 +153,25 @@
                         <div class="col-sm-3" style="padding-top:20px;">
                             <div class="caption-overlay"> 
                                 <figure>
-                                    <a class="cbp-caption fancybox-media" data-rel="1'.$video['id'].'" href="#1'.$video['id'].'" rel="1'.$video['id'].'">
-                                        <img src="'.imagemYouTube($video['link']).'" alt="'.$video['titulo'].'">
+                                    <a class="cbp-caption fancybox-media" data-rel="1{{$video->id}}" href="#1{{$video->id}}" rel="1{{$video->id}}">
+                                        <img src="{{\App\Helpers\Renato::imagemYouTube($video->url)}}" alt="{{$video->titulo}}">
                                     </a>
                                 </figure>
                                 <div class="caption bottom-right" style="bottom: 43%;">
                                     <div class="title" style="width:100%;text-align:center;">
-                                        <img src="'.PATCH.'/images/youtube-btn.png" />
+                                        <img src="{{url('frontend/'.$configuracoes->template.'/assets/images/youtube-btn.png')}}" />
                                     </div>
                                 </div>
                             </div>
                         </div>                                
-                        <div class="col-sm-12" id="1'.$video['id'].'" style="display:none;"> 
-                            <iframe src="'.$video['embed'].'" frameborder="0" allowfullscreen height="360" width="460"></iframe>            
+                        <div class="col-sm-12" id="1{{$video->id}}" style="display:none;"> 
+                            <iframe src="{{$video->embed}}" frameborder="0" allowfullscreen height="360" width="460"></iframe>            
                         </div>
                     @endforeach    
                     <div class="divide10"></div>   
                     @if ($configuracoes->youtube)
                         <div class="col-sm-12" id="link-inscrevase" style="padding-top:20px;text-align: center;">            
-                            <h3><a href="{{$configuracoes->youtube}}" target="_blank">INSCREVA-SE EM NOSSO CANAL</a> &nbsp;&nbsp;<img src="{{url('frontend/assets//images/youtube-btn1.png')}}" /></h3>            
+                            <h3><a href="{{$configuracoes->youtube}}" target="_blank">INSCREVA-SE EM NOSSO CANAL</a> &nbsp;&nbsp;<img src="{{url('frontend/'.$configuracoes->template.'/assets/images/youtube-btn1.png')}}" /></h3>            
                         </div>
                     @endif 
                 </div>
@@ -113,11 +192,11 @@
                             </div><div class="divide10"></div><div class="row">
                         @endif
 
-                        <div class="col-sm-3" style="min-height:290px;">
+                        <div class="col-sm-3" style="min-height:300px;">
                             <div class="caption-overlay">
                                 <figure style="margin-bottom:10px;">
                                     <a class="fancybox-media" data-rel="{{$key}}" href="{{$item->cover()}}" rel="{{$key}}">
-                                        <img height="285" src="{{$item->cover()}}" alt="{{$item->titulo}}"> 
+                                        <img style="height:179px !important;" width="270" src="{{$item->cover()}}" alt="{{$item->titulo}}"> 
                                     </a>
                                 </figure>
                                 <p style="text-align:center;">
@@ -223,5 +302,13 @@
 @endsection
 
 @section('js')
-  
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.8&appId=1787040554899561";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>  
 @endsection
