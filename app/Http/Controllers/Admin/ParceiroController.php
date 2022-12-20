@@ -42,7 +42,7 @@ class ParceiroController extends Controller
         $parceiroCreate->fill($request->all());
 
         if(!empty($request->hasFile('logomarca'))){
-            $parceiroCreate->logomarca = $request->file('logomarca')->storeAs('parceiros', 
+            $parceiroCreate->logomarca = $request->file('logomarca')->storeAs(env('AWS_PASTA') . 'parceiros', 
             Str::slug($request->name)  . '-' . str_replace('.',
              '', microtime(true)) . '.' . $request->file('logomarca')->extension());
         }
@@ -92,14 +92,13 @@ class ParceiroController extends Controller
 
         if(!empty($request->hasFile('logomarca'))){
             Storage::delete($parceiro->logomarca);
-            Cropper::flush($parceiro->logomarca);
             $parceiro->logomarca = '';
         }
 
         $parceiro->fill($request->all());
 
         if(!empty($request->hasFile('logomarca'))){
-            $parceiro->logomarca = $request->file('logomarca')->storeAs('parceiros', 
+            $parceiro->logomarca = $request->file('logomarca')->storeAs(env('AWS_PASTA') . 'parceiros', 
             Str::slug($request->name)  . '-' . str_replace('.',
              '', microtime(true)) . '.' . $request->file('logomarca')->extension());
         }
