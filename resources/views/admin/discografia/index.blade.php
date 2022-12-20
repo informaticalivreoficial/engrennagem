@@ -196,7 +196,7 @@
                 $.ajax({
                     type: 'GET',
                     dataType: 'JSON',
-                    url: '{{ route('discografia.agendaSetStatus') }}',
+                    url: "{{ route('discografia.discografiaSetStatus') }}",
                     data: {
                         'status': status,
                         'id': disco_id
