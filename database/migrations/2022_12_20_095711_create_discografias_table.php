@@ -13,8 +13,22 @@ class CreateDiscografiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('discografias', function (Blueprint $table) {
-            $table->id();
+        Schema::create('discografia', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('titulo');
+            $table->text('ficha_tecnica')->nullable();
+            $table->string('slug')->nullable();
+            $table->text('tags')->nullable();
+            $table->integer('status')->nullable();
+            $table->string('link')->nullable();
+            $table->string('thumb')->nullable();
+            $table->text('letras')->nullable();
+            $table->string('apple_music')->nullable();
+            $table->string('itunes')->nullable();
+            $table->string('music')->nullable();
+            $table->string('deezer')->nullable();
+            $table->string('spotify')->nullable();
+
             $table->timestamps();
         });
     }
@@ -26,6 +40,6 @@ class CreateDiscografiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discografias');
+        Schema::dropIfExists('discografia');
     }
 }
