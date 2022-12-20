@@ -290,6 +290,20 @@ return [
             ]
         ],
         [
+            'text' => 'Discografia',            
+            'icon' => 'fas fa-fw fa-music',
+            'submenu' => [
+                [
+                    'text' => 'Listar Eventos',
+                    'url'  => 'admin/discografia',
+                ],
+                [
+                    'text' => 'Criar Novo',
+                    'url'  => 'admin/discografia/create',
+                ]
+            ]
+        ],
+        [
             'text' => 'Vídeos',
             'url'  => 'admin/videos',
             'icon' => 'fas fa-video',
@@ -338,29 +352,7 @@ return [
                     'url'  => 'admin/whatsapp/numero/cadastrar',
                 ],
             ]
-        ],
-        [
-            'text' => 'Posts',            
-            'icon' => 'fas fa-fw fa-pen',
-            'submenu' => [
-                [
-                    'text' => 'Cadastrar Post',
-                    'url'  => 'admin/posts/create',
-                ],                
-                [
-                    'text' => 'Artigos',
-                    'url'  => 'admin/posts/artigos',
-                ],
-                [
-                    'text' => 'Páginas',
-                    'url'  => 'admin/posts/paginas',
-                ],
-                [
-                    'text' => 'Categorias',
-                    'url'  => 'admin/posts/categorias',
-                ]
-            ]
-        ],
+        ],        
         [
             'text' => 'Email',            
             'icon' => 'fas fa-fw fa-envelope',
