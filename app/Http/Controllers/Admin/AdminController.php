@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatPost;
-use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use Analytics;
@@ -15,7 +13,6 @@ use App\Models\GaleriaGb;
 use App\Models\Newsletter;
 use App\Models\NewsletterCat;
 use App\Models\Video;
-use Illuminate\Support\Facades\DB;
 use Spatie\Analytics\Period;
 
 class AdminController extends Controller
@@ -34,40 +31,12 @@ class AdminController extends Controller
         $videosAvailable = Video::available()->count();
         $videosUnavailable = Video::unavailable()->count();
         //Newsletter
-        // $listas = NewsletterCat::count();
-        // $emails = Newsletter::count();
-        // $emailsCount = Newsletter::get();
-        //CHART PIZZA
-        $postsArtigos = Post::where('tipo', 'artigo')->count();
-        $postsPaginas = Post::where('tipo', 'pagina')->count();
-        $postsNoticias = Post::where('tipo', 'noticia')->count();
+        $listas = NewsletterCat::count();
+        $emails = Newsletter::count();
+        $emailsCount = Newsletter::get();        
         //Eventos
         $eventoAvailable = Agenda::available()->count();
         $eventoUnavailable = Agenda::unavailable()->count();
-        $artigosTop = Post::orderBy('views', 'DESC')
-                ->where('tipo', 'artigo')
-                ->limit(6)
-                ->postson()   
-                ->get();                
-        $totalViewsArtigos = Post::orderBy('views', 'DESC')
-                ->where('tipo', 'artigo')
-                ->postson()
-                ->limit(6)
-                ->get()
-                ->sum('views');
-        //Páginas
-        $paginasTop = Post::orderBy('views', 'DESC')
-                ->where('tipo', 'pagina')
-                ->limit(6)
-                ->postson()   
-                ->get();
-        $totalViewsPaginas = Post::orderBy('views', 'DESC')
-                ->where('tipo', 'pagina')
-                ->postson()
-                ->limit(6)
-                ->get()
-                ->sum('views');
-
         //Analitcs
         $visitasHoje = Analytics::fetchMostVisitedPages(Period::days(1));
         $visitas365 = Analytics::fetchTotalVisitorsAndPageViews(Period::months(5));
@@ -85,9 +54,9 @@ class AdminController extends Controller
         
         return view('admin.dashboard',[
             //Newsletter
-        //     'listas' => $listas,
-        //     'emails' => $emails,
-        //     'emailsCount' => $emailsCount->sum('count'),
+            'listas' => $listas,
+            'emails' => $emails,
+            'emailsCount' => $emailsCount->sum('count'),
             'time' => $time,
             //Vídeos
             'videosAvailable' => $videosAvailable,
@@ -95,20 +64,14 @@ class AdminController extends Controller
             //Eventos
             'eventoAvailable' => $eventoAvailable,
             'eventoUnavailable' => $eventoUnavailable,
-            'artigosTop' => $artigosTop,
-            'artigostotalviews' => $totalViewsArtigos,
-            //Páginas
-            'paginasTop' => $paginasTop,
-            'paginastotalviews' => $totalViewsPaginas,
+            
             'usersAvailable' => $usersAvailable,
             'usersUnavailable' => $usersUnavailable,
             //Galerias
             'galeriasAvailable' => $galeriasAvailable,
             'galeriasUnavailable' => $galeriasUnavailable,
             'galeriasImages' => $galeriasImages,
-            'postsArtigos' => $postsArtigos,
-            'postsNoticias' => $postsNoticias,
-            'postsPaginas' => $postsPaginas,
+            
             //Analytics
             'visitasHoje' => $visitasHoje,
             //'visitas365' => $visitas365,

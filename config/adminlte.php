@@ -352,17 +352,7 @@ return [
                     'url'  => 'admin/whatsapp/numero/cadastrar',
                 ],
             ]
-        ],        
-        [
-            'text' => 'Email',            
-            'icon' => 'fas fa-fw fa-envelope',
-            'submenu' => [
-                [
-                    'text' => 'Enviar Email',
-                    'url'  => 'admin/email/enviar-email',
-                ],                
-            ]
-        ],  
+        ], 
     ],
 
     /*
