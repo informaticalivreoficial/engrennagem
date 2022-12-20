@@ -24,6 +24,46 @@
     </div>  
 </section>
 
+@if (!empty($eventos) && $eventos->count() > 0)
+    <section id="agenda" style="padding-top: 70px; margin-top: -70px;"> 
+        <div class="light-wrapper" style="background-image: url({{url('frontend/'.$configuracoes->template.'/assets/images/agendabg.png')}});color:#000;background-repeat:no-repeat;background-size:cover;background-position:center;">
+            <div class="container inner" style="padding-top:50px;">
+                <div class="divide10"></div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="pricing panel" style="background-color: transparent;border:none;">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tbody>
+                                    @foreach($eventos as $evento)
+                                        <tr>
+                                            <td style="padding:0px;border:none;">
+                                                <p style="margin:15px 0 2px 0;font-size: 20px;text-transform: uppercase;text-align:center;">
+                                                <span style="font-size: 28px;">{{ date('d', strtotime($evento->data)) }}</span><br />
+                                                {{ strftime('%b', strtotime($evento->data)) }}</p>
+                                            </td>
+                                            <td style="padding:0px;border:none;">
+                                                <p style="margin:15px 0 2px 0;line-height:24px;text-align:left;font-size: 20px;"><strong>{{$evento->titulo}}</strong><br />
+                                                <span style="font-size:14px;">{{$evento->endereco}}</span></p> 
+                                            </td>
+                                            <td style="padding:0px;border:none;">
+                                                <p style="margin:15px 0 2px 0;">
+                                                    <a target="_blank" href="{{$evento->link ?? '#'}}" class="btn btn btn-red">+ INFO</a>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endif
+
 @if (!empty($videos) && $videos->count() > 0)
     <section id="videos">
         <div class="light-wrapper">
