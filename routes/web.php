@@ -5,19 +5,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     AdminController,
     AgendaController,
-    ApartamentoController,
-    AvaliacaoController,
     UserController,
     EmailController,
     PostController,
     CatPostController,
     ConfigController,
-    EmpresaController,
+    DiscografiaController,
     GaleriaController,
     MenuController,
     NewsletterController,
     ParceiroController,
-    ReservaController,
     SitemapController,
     SlideController,
     VideoController,
@@ -217,6 +214,16 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::get('agenda/create', [AgendaController::class, 'create'])->name('agenda.create');
     Route::post('agenda/store', [AgendaController::class, 'store'])->name('agenda.store');
     Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
+
+    //****************************** Discografia *******************************************/
+    Route::get('discografia/set-status', [DiscografiaController::class, 'discografiaSetStatus'])->name('discografia.discografiaSetStatus');
+    Route::delete('discografia/deleteon', [DiscografiaController::class, 'deleteon'])->name('discografia.deleteon');
+    Route::get('discografia/delete', [DiscografiaController::class, 'delete'])->name('discografia.delete');
+    Route::put('discografia/{id}', [DiscografiaController::class, 'update'])->name('discografia.update');
+    Route::get('discografia/{id}/edit', [DiscografiaController::class, 'edit'])->name('discografia.edit');
+    Route::get('discografia/create', [DiscografiaController::class, 'create'])->name('discografia.create');
+    Route::post('discografia/store', [DiscografiaController::class, 'store'])->name('discografia.store');
+    Route::get('/discografia', [DiscografiaController::class, 'index'])->name('discografia.index');
 
     //****************************** Galerias *******************************************/
     Route::get('galerias/set-status', [GaleriaController::class, 'galeriaSetStatus'])->name('galerias.galeriaSetStatus');
