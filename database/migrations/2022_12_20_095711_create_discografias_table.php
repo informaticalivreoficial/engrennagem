@@ -16,6 +16,7 @@ class CreateDiscografiasTable extends Migration
         Schema::create('discografia', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo');
+            $table->bigInteger('views')->default(0);
             $table->text('ficha_tecnica')->nullable();
             $table->string('slug')->nullable();
             $table->text('tags')->nullable();
