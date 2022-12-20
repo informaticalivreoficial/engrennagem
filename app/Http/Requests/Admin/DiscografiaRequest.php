@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Admin;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +14,7 @@ class DiscografiaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,7 @@ class DiscografiaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'titulo' => ['required', 'min:3', 'max:255']
         ];
     }
 }

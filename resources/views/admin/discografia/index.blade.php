@@ -19,7 +19,7 @@
 @section('content')
     <div class="card">
         <div class="card-header text-right">
-            <a href="{{route('agenda.create')}}" class="btn btn-default"><i class="fas fa-plus mr-2"></i> Cadastrar Novo</a>
+            <a href="{{route('discografia.create')}}" class="btn btn-default"><i class="fas fa-plus mr-2"></i> Cadastrar Novo</a>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -52,7 +52,7 @@
                                 </a>
                             </td>
                             <td>{{$disco->titulo}}</td>
-                            <td class="text-center">{{$disco->created_at}}</td>
+                            <td class="text-center">{{Carbon\Carbon::parse($disco->created_at)->format('d/m/Y')}}</td>
                             <td class="text-center">{{$disco->views}}</td>                            
                             <td>
                                 <input type="checkbox" data-onstyle="success" data-offstyle="warning" data-size="mini" class="toggle-class" data-id="{{ $disco->id }}" data-toggle="toggle" data-style="slow" data-on="<i class='fas fa-check'></i>" data-off="<i style='color:#fff !important;' class='fas fa-exclamation-triangle'></i>" {{ $disco->status == true ? 'checked' : ''}}>

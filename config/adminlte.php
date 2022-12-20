@@ -294,7 +294,7 @@ return [
             'icon' => 'fas fa-fw fa-music',
             'submenu' => [
                 [
-                    'text' => 'Listar Eventos',
+                    'text' => 'Listar Discos',
                     'url'  => 'admin/discografia',
                 ],
                 [

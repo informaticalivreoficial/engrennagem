@@ -29,6 +29,7 @@ class CreateDiscografiasTable extends Migration
             $table->string('music')->nullable();
             $table->string('deezer')->nullable();
             $table->string('spotify')->nullable();
+            $table->string('youtube')->nullable();
 
             $table->timestamps();
         });

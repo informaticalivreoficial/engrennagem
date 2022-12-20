@@ -66,7 +66,7 @@ class DiscografiaController extends Controller
         }
 
         $disco->save();
-        $disco->setUrl();
+        $disco->setSlug();
         
         return redirect()->route('discografia.edit', [
             'id' => $disco->id,

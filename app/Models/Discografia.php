@@ -11,11 +11,11 @@ class Discografia extends Model
 {
     use HasFactory;
 
-    protected $table = 'agenda';
+    protected $table = 'discografia';
 
     protected $fillable = [
         'titulo', 'ficha_tecnica', 'slug', 'link', 'tags', 'status', 'thumb', 
-        'letras', 'views', 'apple_music', 'itunes', 'music', 'deezer', 'spotify'
+        'letras', 'views', 'apple_music', 'itunes', 'music', 'deezer', 'spotify', 'youtube'
     ];
 
     /**
