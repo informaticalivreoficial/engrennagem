@@ -248,6 +248,20 @@ return [
             'icon' => 'fas fa-bars',
         ],
         [
+            'text' => 'Arquivos',            
+            'icon' => 'fas fa-fw fa-folder',
+            'submenu' => [
+                [
+                    'text' => 'Listar Arquivos',
+                    'url'  => 'admin/arquivos',
+                ],
+                [
+                    'text' => 'Criar Novo',
+                    'url'  => 'admin/arquivos/create',
+                ]
+            ]
+        ],
+        [
             'text' => 'Usuários',            
             'icon' => 'fas fa-fw fa-users',
             'submenu' => [

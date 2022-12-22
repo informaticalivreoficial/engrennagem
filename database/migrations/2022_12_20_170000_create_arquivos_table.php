@@ -14,7 +14,16 @@ class CreateArquivosTable extends Migration
     public function up()
     {
         Schema::create('arquivos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('titulo');
+            $table->text('content')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('tipo')->nullable();
+            $table->string('thumb')->nullable();
+            $table->bigInteger('views')->default(0);
+            $table->string('arquivo');
+            $table->integer('status')->nullable();
+            
             $table->timestamps();
         });
     }

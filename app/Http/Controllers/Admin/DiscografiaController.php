@@ -61,7 +61,7 @@ class DiscografiaController extends Controller
 
         if(!empty($request->hasFile('thumb'))){
             $disco->thumb = $request->file('thumb')->storeAs(env('AWS_PASTA') . 'discografia', 
-            Str::slug($request->name)  . '-' . str_replace('.',
+            Str::slug($request->titulo)  . '-' . str_replace('.',
              '', microtime(true)) . '.' . $request->file('thumb')->extension());
         }
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     AdminController,
     AgendaController,
+    ArquivoController,
     UserController,
     EmailController,
     PostController,
@@ -208,6 +209,16 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::get('discografia/create', [DiscografiaController::class, 'create'])->name('discografia.create');
     Route::post('discografia/store', [DiscografiaController::class, 'store'])->name('discografia.store');
     Route::get('/discografia', [DiscografiaController::class, 'index'])->name('discografia.index');
+
+    //****************************** Arquivos *******************************************/
+    Route::get('arquivos/set-status', [ArquivoController::class, 'setStatus'])->name('arquivos.setStatus');
+    Route::delete('arquivos/deleteon', [ArquivoController::class, 'deleteon'])->name('arquivos.deleteon');
+    Route::get('arquivos/delete', [ArquivoController::class, 'delete'])->name('arquivos.delete');
+    Route::put('arquivos/{id}', [ArquivoController::class, 'update'])->name('arquivos.update');
+    Route::get('arquivos/{id}/edit', [ArquivoController::class, 'edit'])->name('arquivos.edit');
+    Route::get('arquivos/create', [ArquivoController::class, 'create'])->name('arquivos.create');
+    Route::post('arquivos/store', [ArquivoController::class, 'store'])->name('arquivos.store');
+    Route::get('/arquivos', [ArquivoController::class, 'index'])->name('arquivos.index');
 
     //****************************** Galerias *******************************************/
     Route::get('galerias/set-status', [GaleriaController::class, 'galeriaSetStatus'])->name('galerias.galeriaSetStatus');
