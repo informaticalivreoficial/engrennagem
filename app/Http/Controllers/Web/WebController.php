@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\{
     Agenda,
+    Arquivo,
     Post,
     CatPost,
     Cidades,
@@ -59,6 +60,7 @@ class WebController extends Controller
         $parceiros = Parceiro::orderBy('created_at', 'DESC')->available()->limit(4)->get();
         $eventos = Agenda::orderBy('data', 'DESC')->available()->limit(10)->get();
         $discografia = Discografia::orderBy('created_at', 'DESC')->available()->limit(6)->get();
+        $arquivos = Arquivo::orderBy('created_at', 'DESC')->available()->limit(8)->get();
         
         $head = $this->seo->render($this->configService->getConfig()->nomedosite ?? 'Informática Livre',
             $this->configService->getConfig()->descricao ?? 'Informática Livre desenvolvimento de sistemas web desde 2005',
@@ -73,7 +75,8 @@ class WebController extends Controller
             'galerias' => $galerias,
             'parceiros' => $parceiros,
             'eventos' => $eventos,
-            'discografia' => $discografia
+            'discografia' => $discografia,
+            'arquivos' => $arquivos
 		]);
     }
 

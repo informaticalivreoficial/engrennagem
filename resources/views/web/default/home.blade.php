@@ -220,6 +220,29 @@
     </section>
 @endif
 
+@if (!empty($arquivos) && $arquivos->count() > 0)
+    <section id="contratante" style="padding-top: 70px; margin-top: -70px;"> 
+        <div class="light-wrapper" style="background-image: url({{url('frontend/'.$configuracoes->template.'/assets/images/contratante-bg.png')}});color:#000;background-repeat:no-repeat;background-size: cover;background-position:center;">
+            <div class="container inner"> 
+                <div class="divide10"></div>    
+                <div class="row">
+                    <div class="col-sm-12" style="text-align: center;">
+                        <h1 style="text-shadow: 1px 1px 1px #000;color: #ddd;">ÁREA DO CONTRATANTE</h1>
+                    </div>    
+                    <div class="divide10"></div>
+                    @foreach($arquivos as $arquivo)
+                        <div class="col-sm-3" style="padding-top:20px;">
+                            <a href="{{ \Illuminate\Support\Facades\Storage::url($arquivo->arquivo) }}">
+                                <img src="{{$arquivo->cover()}}" alt="{{$arquivo->titulo}}">
+                            </a>
+                        </div>
+                    @endforeach
+                </div>  
+            </div>
+        </div>    
+    </section>   
+@endif
+
 <section id="contato">
     <div class="light-wrapper" style="background-image: url({{url('frontend/'.$configuracoes->template.'/assets/images/contact-bg.jpg')}});color:#000;background-repeat:no-repeat;background-size: cover;background-position:center;">  
         <div class="container inner">   
@@ -295,6 +318,72 @@
     </div>  
 </section> 
 
+
+<div class="dialog">
+    <div class="loadsistem">        
+        <header class="dialog-topo">
+            <h3><strong>&nbsp;</strong></h3>
+            <p>&nbsp;</p>
+        </header>
+        <fieldset>
+            <section>            
+                <div class="row">
+                    <div class="col-sm-12 formmodal">
+                        <form class="j_formsubmit" method="post" action="" autocomplete="off">
+                            @csrf
+                            <div class="row  wow fadeInUp animated" data-wow-duration="1000ms" data-wow-delay="300ms" style="visibility: visible; animation-duration: 1000ms; animation-delay: 300ms; animation-name: fadeInUp;">
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
+                                    <div id="js-contact-result"></div>
+                                    <!-- HONEYPOT -->
+                                    <input type="hidden" class="noclear" name="bairro" value="" />
+                                    <input type="text" class="noclear" style="display: none;" name="cidade" value="" />
+                                </div>
+                
+                                <div class="form_hide">
+                                    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <input type="text" name="nome" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label>E-mail</label>
+                                            <input type="email" name="email" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label>WhatsApp</label>
+                                            <input type="text" name="numero"  class="form-control whatsapp"/>
+                                        </div>
+                                    </div> 
+                                </div>
+                
+                                <div class="clearfix"></div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 hiddemmodal">
+                                    &nbsp;
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="form-group modalfooter">
+                                        <button type="button" class="modal-btn btnfechar">Fechar &nbsp;<strong></strong></button>
+                                    </div>
+                                </div>
+                                <div class="form_hide">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <div class="form-group modalfooter">
+                                        <button type="submit" style="width: 100%;" class="modal-btn btnsuccess btncheckout">Cadastrar<strong> :)</strong></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>   
+                    </div>            
+                </div>	
+			</section>
+        </fieldset>
+    </div>
+</div> 
 @endsection
 
 @section('css')
@@ -302,13 +391,120 @@
 @endsection
 
 @section('js')
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.8&appId=1787040554899561";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>  
+<script src="{{url(asset('backend/assets/js/jquery.mask.js'))}}"></script>
+<script>
+
+    $(document).ready(function () { 
+        var $whatsapp = $(".whatsapp");
+        $whatsapp.mask('(99) 99999-9999', {reverse: false});
+    });
+
+    $(function () {
+
+        $('.modalcadastro').click(function (){
+            $('.dialog').css('display','block');
+        });
+        
+        $('.btnfechar').click(function (){
+            $('.dialog').modal().hide();
+        });
+
+        // Seletor, Evento/efeitos, CallBack, Ação
+        $('.j_formsubmit').submit(function (){
+            var form = $(this);
+            var dataString = $(form).serialize();
+
+            $.ajax({
+                url: "{{ route('web.sendWhatsapp') }}",
+                data: dataString,
+                type: 'GET',
+                dataType: 'JSON',
+                beforeSend: function(){
+                    form.find(".btncheckout").attr("disabled", true);
+                    form.find('.btncheckout').html("Carregando...");                
+                    form.find('.alert').fadeOut(500, function(){
+                        $(this).remove();
+                    });
+                },
+                success: function(resposta){
+                    $('html, body').animate({scrollTop:$('#js-contact-result').offset().top-100}, 'slow');
+                    if(resposta.error){
+                        form.find('#js-contact-result').html('<div class="alert alert-danger error-msg">'+ resposta.error +'</div>');
+                        form.find('.error-msg').fadeIn();                    
+                    }else{
+                        form.find('#js-contact-result').html('<div class="alert alert-success error-msg">'+ resposta.sucess +'</div>');
+                        form.find('.error-msg').fadeIn();                    
+                        form.find('input[class!="noclear"]').val('');
+                        form.find('textarea[class!="noclear"]').val('');
+                        form.find('.form_hide').fadeOut(500);
+                    }
+                },
+                complete: function(resposta){
+                    form.find(".btncheckout").attr("disabled", false);
+                    form.find('.btncheckout').html("Cadastrar Agora &nbsp;<strong>:)</strong>");                                
+                }
+            });
+            return false;
+        });
+
+    });
+
+
+    $(document).ready(function() {
+        
+        
+        
+        
+        //FUNÇÕES DO FORM DE CADASTRO
+        // $('.j_formsubmit').submit(function (){
+        //     var form = $(this);
+        //     var data = $(this).serialize();
+            
+        //     $.ajax({
+        //         url: ajaxbase,
+        //         data: data,
+        //         type: 'POST',
+        //         dataType: 'json',
+                
+        //         beforeSend: function(){
+        //             form.find('.btnsuccess').html("Carregando...");
+        //             form.find('.alert').fadeOut(500, function(){
+        //                 $(this).remove();
+        //             });
+        //         },
+        //         success: function(resposta){
+        //            //$('html, body').animate({scrollTop:$('.alertas').offset().top-135}, 'slow'); 
+        //            if(resposta.error){                    
+        //                 form.find('.alertas').html('<div class="alert alert-danger">'+ resposta.error +'</div>');
+        //                 form.find('.alert-danger').fadeIn();                    
+        //             }else{
+        //                 form.find('.alertas').html('<div class="alert alert-success">'+ resposta.sucess +'</div>');
+        //                 form.find('.alert-sucess').fadeIn();                    
+        //                 form.find('input[class!="noclear"]').val('');
+        //                 //form.find('textarea[class!="noclear"]').val('');
+        //                 form.find('.form_hide').fadeOut(500);
+        //                 $('.hiddemmodal').css('display','block');
+                        
+        //             }
+        //         },
+        //         complete: function(resposta){
+        //             form.find('.btnsuccess').html("Cadastrar Agora &nbsp;<strong>:)</strong>");                               
+        //         }
+        //     });
+        
+        //     return false;
+        // });        
+        
+    });
+    </script>
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.8&appId=1787040554899561";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>  
 @endsection

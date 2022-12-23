@@ -35,9 +35,6 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     //**************************** Emails ********************************************/
     Route::get('/atendimento', [WebController::class, 'atendimento'])->name('atendimento');
     Route::get('/sendEmail', [SendEmailController::class, 'sendEmail'])->name('sendEmail');
-    Route::get('/sendNewsletter', [SendEmailController::class, 'sendNewsletter'])->name('sendNewsletter');
-    Route::get('/acomodacaoSend', [SendEmailController::class, 'acomodacaoSend'])->name('acomodacaoSend');
-
     Route::get('/sendWhatsApp', [SendWhatsappController::class, 'sendWhatsapp'])->name('sendWhatsapp');
     
     //*************************************** Páginas *******************************************/

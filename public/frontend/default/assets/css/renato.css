@@ -79,7 +79,7 @@
 .dialog-topo{
     height: 218px;
     padding-top: 40px;
-    background: url(../images/modal/overlay_head-.jpg) center top no-repeat;
+    background: url(../images/overlay_head-.jpg) center top no-repeat;
 }
 .dialog-topo h3 {
     font-size: 35px;

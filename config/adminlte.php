@@ -243,11 +243,6 @@ return [
             'icon' => 'fas fa-cog',
         ],
         [
-            'text' => 'Menu',
-            'url'  => 'admin/menus',
-            'icon' => 'fas fa-bars',
-        ],
-        [
             'text' => 'Arquivos',            
             'icon' => 'fas fa-fw fa-folder',
             'submenu' => [
