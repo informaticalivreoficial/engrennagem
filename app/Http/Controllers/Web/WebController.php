@@ -184,4 +184,10 @@ class WebController extends Controller
             'head' => $head
         ]);
     } 
+
+    // public function addCountAgenda(Request $request)
+    // {
+    //     $agenda = Agenda::
+    //     return response()->json(['success' => $request->all()]);
+    // }
 }

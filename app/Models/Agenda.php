@@ -50,13 +50,13 @@ class Agenda extends Model
         $this->attributes['data'] = (!empty($value) ? $this->convertStringToDate($value) : null);
     }
 
-    public function getDataAttribute($value)
-    {
-        if (empty($value)) {
-            return null;
-        }
-        return date('d/m/Y', strtotime($value));
-    }
+    // public function getDataAttribute($value)
+    // {
+    //     if (empty($value)) {
+    //         return null;
+    //     }
+    //     return date('d/m/Y', strtotime($value));
+    // }
     
     public function setUrl()
     {

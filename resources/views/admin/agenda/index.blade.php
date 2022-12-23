@@ -52,7 +52,7 @@
                                 </a>
                             </td>
                             <td>{{$evento->titulo}}</td>
-                            <td class="text-center">{{$evento->data}} - {{$evento->time}}</td>
+                            <td class="text-center">{{\Carbon\Carbon::parse($evento->data)->format('d/m/Y')}} - {{$evento->time}}</td>
                             <td class="text-center">{{$evento->views}}</td>                            
                             <td>
                                 <input type="checkbox" data-onstyle="success" data-offstyle="warning" data-size="mini" class="toggle-class" data-id="{{ $evento->id }}" data-toggle="toggle" data-style="slow" data-on="<i class='fas fa-check'></i>" data-off="<i style='color:#fff !important;' class='fas fa-exclamation-triangle'></i>" {{ $evento->status == true ? 'checked' : ''}}>

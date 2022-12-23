@@ -40,7 +40,7 @@
                                             <td style="padding:0px;border:none;">
                                                 <p style="margin:15px 0 2px 0;font-size: 20px;text-transform: uppercase;text-align:center;">
                                                 <span style="font-size: 28px;">{{ date('d', strtotime($evento->data)) }}</span><br />
-                                                {{ strftime('%b', strtotime($evento->data)) }}</p>
+                                                {{ Carbon\Carbon::parse($evento->data)->formatLocalized('%b') }}</p>
                                             </td>
                                             <td style="padding:0px;border:none;">
                                                 <p style="margin:15px 0 2px 0;line-height:24px;text-align:left;font-size: 20px;"><strong>{{$evento->titulo}}</strong><br />
@@ -48,7 +48,7 @@
                                             </td>
                                             <td style="padding:0px;border:none;">
                                                 <p style="margin:15px 0 2px 0;">
-                                                    <a target="_blank" href="{{$evento->link ?? '#'}}" class="btn btn btn-red">+ INFO</a>
+                                                    <a target="_blank" href="{{$evento->link ?? '#'}}" class="btn btn btn-red j_info">+ INFO</a>
                                                 </p>
                                             </td>
                                         </tr>
@@ -401,6 +401,13 @@
 
     $(function () {
 
+        // $(".j_info").click(function(){
+        //     $.post("{{ route('web.addCountAgenda') }}", {val:'1'}).done(function(response){
+        //         alert("success");
+        //         console.log(response.success);
+        //     });
+        // });
+
         $('.modalcadastro').click(function (){
             $('.dialog').css('display','block');
         });
@@ -448,55 +455,8 @@
         });
 
     });
-
-
-    $(document).ready(function() {
-        
-        
-        
-        
-        //FUNÇÕES DO FORM DE CADASTRO
-        // $('.j_formsubmit').submit(function (){
-        //     var form = $(this);
-        //     var data = $(this).serialize();
-            
-        //     $.ajax({
-        //         url: ajaxbase,
-        //         data: data,
-        //         type: 'POST',
-        //         dataType: 'json',
-                
-        //         beforeSend: function(){
-        //             form.find('.btnsuccess').html("Carregando...");
-        //             form.find('.alert').fadeOut(500, function(){
-        //                 $(this).remove();
-        //             });
-        //         },
-        //         success: function(resposta){
-        //            //$('html, body').animate({scrollTop:$('.alertas').offset().top-135}, 'slow'); 
-        //            if(resposta.error){                    
-        //                 form.find('.alertas').html('<div class="alert alert-danger">'+ resposta.error +'</div>');
-        //                 form.find('.alert-danger').fadeIn();                    
-        //             }else{
-        //                 form.find('.alertas').html('<div class="alert alert-success">'+ resposta.sucess +'</div>');
-        //                 form.find('.alert-sucess').fadeIn();                    
-        //                 form.find('input[class!="noclear"]').val('');
-        //                 //form.find('textarea[class!="noclear"]').val('');
-        //                 form.find('.form_hide').fadeOut(500);
-        //                 $('.hiddemmodal').css('display','block');
-                        
-        //             }
-        //         },
-        //         complete: function(resposta){
-        //             form.find('.btnsuccess').html("Cadastrar Agora &nbsp;<strong>:)</strong>");                               
-        //         }
-        //     });
-        
-        //     return false;
-        // });        
-        
-    });
-    </script>
+   
+</script>
 
     <div id="fb-root"></div>
     <script>(function(d, s, id) {

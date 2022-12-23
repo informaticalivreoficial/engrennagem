@@ -4,8 +4,7 @@
 <section class="banner-tems text-center">
     <div class="container">
         <div class="banner-content">
-            <h2 class="h2sombra">Política de Privacidade</h2>
-            <p>&nbsp;</p>
+            <h2>Política de Privacidade</h2>
         </div>
     </div>
 </section>

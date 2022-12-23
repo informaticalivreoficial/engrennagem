@@ -127,7 +127,9 @@
         <footer class="footer inverse-wrapper">
             <div class="sub-footer">
                 <div class="container inner">
-                    <p class="text-center">© {{$configuracoes->ano_de_inicio}} - {{date('Y')}} {{$configuracoes->nomedosite}}. Todos os direitos reservados.</p>
+                    <p class="text-center">© {{$configuracoes->ano_de_inicio}} - {{date('Y')}} {{$configuracoes->nomedosite}}. Todos os direitos reservados. <a href="{{route('web.politica')}}">Política de Privacidade</a></p>
+                    
+                    
                 </div>
             </div>
         </footer>

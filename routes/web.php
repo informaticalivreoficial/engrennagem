@@ -36,6 +36,7 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     Route::get('/atendimento', [WebController::class, 'atendimento'])->name('atendimento');
     Route::get('/sendEmail', [SendEmailController::class, 'sendEmail'])->name('sendEmail');
     Route::get('/sendWhatsApp', [SendWhatsappController::class, 'sendWhatsapp'])->name('sendWhatsapp');
+    Route::post('/addCountAgenda', [WebController::class, 'addCountAgenda'])->name('addCountAgenda');
     
     //*************************************** Páginas *******************************************/
     Route::get('/pagina/{slug}', [WebController::class, 'pagina'])->name('pagina');
@@ -47,11 +48,7 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     //****************************** Parceiros *********************************************/
     Route::get('/sendEmailParceiro', [SendEmailController::class, 'sendEmailParceiro'])->name('sendEmailParceiro');
     Route::get('/parceiro/{slug}', [WebController::class, 'parceiro'])->name('parceiro');
-    Route::get('/parceiros', [WebController::class, 'parceiros'])->name('parceiros');
-    
-    //** Pesquisa */
-    Route::match(['post', 'get'], '/pesquisa', [WebController::class, 'pesquisa'])->name('pesquisa');
-    Route::match(['post', 'get'], '/zapchat', [WebController::class, 'zapchat'])->name('zapchat');
+    Route::get('/parceiros', [WebController::class, 'parceiros'])->name('parceiros'); 
 
     /** FEED */
     Route::get('feed', [RssFeedController::class, 'feed'])->name('feed');
@@ -176,16 +173,6 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::get('usuarios/create', [UserController::class, 'create'])->name('users.create');
     Route::post('usuarios/store', [UserController::class, 'store'])->name('users.store');
     Route::get('usuarios', [UserController::class, 'index'])->name('users.index');
-
-    //****************************** Menu *******************************************/
-    Route::get('menus/set-status', [MenuController::class, 'menuSetStatus'])->name('menus.menuSetStatus');
-    Route::delete('menus/deleteon', [MenuController::class, 'deleteon'])->name('menus.deleteon');
-    Route::get('menus/delete', [MenuController::class, 'delete'])->name('menus.delete');
-    Route::put('menus/{id}', [MenuController::class, 'update'])->name('menus.update');
-    Route::get('menus/{id}/edit', [MenuController::class, 'edit'])->name('menus.edit');
-    Route::get('menus/create', [MenuController::class, 'create'])->name('menus.create');
-    Route::post('menus/store', [MenuController::class, 'store'])->name('menus.store');
-    Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
 
     //****************************** Agenda *******************************************/
     Route::get('agenda/set-status', [AgendaController::class, 'agendaSetStatus'])->name('agenda.agendaSetStatus');
