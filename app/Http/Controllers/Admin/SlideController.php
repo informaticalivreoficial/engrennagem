@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Slide;
 use App\Http\Requests\Admin\Slide as SlideRequest;
 use App\Support\Cropper;
+use Illuminate\Support\Facades\Redirect;
 
 class SlideController extends Controller
 {
@@ -49,23 +50,23 @@ class SlideController extends Controller
         return redirect()->route('slides.edit', $slideCreate->id)->with(['color' => 'success', 'message' => 'Slide cadastrado com sucesso!']);
     }    
     
-    public function edit($slide)
+    public function edit($id)
     {
-        $slide = Slide::where('id', $slide)->first(); 
+        $slide = Slide::where('id', $id)->first(); 
         
         return view('admin.slides.edit', [
             'slide' => $slide
         ]);
     }
     
-    public function update(SlideRequest $request, $slide)
+    public function update(SlideRequest $request, $id)
     {
-        $slide = Slide::where('id', $slide)->first();
+        $slide = Slide::where('id', $id)->first();
         
         $validator = Validator::make($request->only('files'), ['files.*' => 'image']);
 
         if ($validator->fails() === true) {
-            return redirect()->back()->withInput()->with([
+            return Redirect::back()->withInput()->with([
                 'color' => 'orange',
                 'message' => 'Todas as imagens devem ser do tipo jpg, jpeg ou png.',
             ]);
@@ -84,15 +85,13 @@ class SlideController extends Controller
         }
 
         if(!$slide->save()){
-            return redirect()->back()->withInput()->with([
+            return Redirect::back()->withInput()->with([
                 'color' => 'orange',
                 'message' => 'Erro ao salvar Slide',
             ]);
         }        
 
-        return redirect()->route('slides.edit', [
-            'slide' => $slide->id
-        ])->with(['color' => 'success', 'message' => 'Slide atualizado com sucesso!']);
+        return Redirect::route('slides.edit', $slide->id)->with(['color' => 'success', 'message' => 'Slide atualizado com sucesso!']);
     }
 
     public function slideSetStatus(Request $request)
