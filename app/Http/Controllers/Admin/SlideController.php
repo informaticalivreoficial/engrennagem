@@ -49,18 +49,18 @@ class SlideController extends Controller
         return redirect()->route('slides.edit', $slideCreate->id)->with(['color' => 'success', 'message' => 'Slide cadastrado com sucesso!']);
     }    
     
-    public function edit($id)
+    public function edit($slide)
     {
-        $slide = Slide::where('id', $id)->first(); 
+        $slide = Slide::where('id', $slide)->first(); 
         
         return view('admin.slides.edit', [
             'slide' => $slide
         ]);
     }
     
-    public function update(SlideRequest $request, $id)
+    public function update(SlideRequest $request, $slide)
     {
-        $slide = Slide::where('id', $id)->first();
+        $slide = Slide::where('id', $slide)->first();
         
         $validator = Validator::make($request->only('files'), ['files.*' => 'image']);
 
@@ -73,7 +73,6 @@ class SlideController extends Controller
 
         if(!empty($request->file('imagem'))){
             Storage::delete($slide->imagem);
-            //Cropper::flush($slide->imagem);
             $slide->imagem = '';
         }
 
