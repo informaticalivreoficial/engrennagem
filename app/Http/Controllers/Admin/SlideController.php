@@ -91,7 +91,9 @@ class SlideController extends Controller
             ]);
         }        
 
-        return redirect()->route('slides.edit', $slide->id)->with(['color' => 'success', 'message' => 'Slide atualizado com sucesso!']);
+        return redirect()->route('slides.edit', [
+            'slide' => $slide->id
+        ])->with(['color' => 'success', 'message' => 'Slide atualizado com sucesso!']);
     }
 
     public function slideSetStatus(Request $request)
