@@ -61,7 +61,7 @@ $config = [
             
 <form action="{{ route('slides.update', ['slide' => $slide->id]) }}" method="post" enctype="multipart/form-data" autocomplete="off">
 @csrf
-@method('PUT')          
+@method('PUT')           
 <div class="row">            
     <div class="col-12">
         <div class="card card-teal card-outline"> 

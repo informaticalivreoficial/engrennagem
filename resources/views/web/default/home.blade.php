@@ -214,7 +214,18 @@
                         @endif 
                         @php $count++; @endphp
                     @endforeach
-                </div>             
+                </div> 
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                    </div>    
+                    <div class="col-md-4">
+                        <a href="{{route('web.galerias')}}" class="btn btn-default btn-lg btn-block">Ver Mais</a>
+                    </div>    
+                    <div class="col-md-4">
+                        
+                    </div>    
+                </div>            
             </div>  
         </div>  
     </section>

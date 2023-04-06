@@ -2,66 +2,74 @@
 
 @section('content')
 
-    <section class="banner-tems text-center">
-        <div class="container">
-            <div class="banner-content">
-                <h2 class="h2sombra">Galerias</h2>
-                <p>&nbsp;</p>
-            </div>
-        </div>
-    </section>
-
     @if (!empty($galerias) && $galerias->count() > 0)
-        <div class="gallery-our wrap-gallery-restaurant gallery_1">
-            <div class="container">
-                <div class="gallery gallery-restaurant">  
-                        <ul class="nav nav-tabs text-uppercase">
-                            @foreach ($galerias as $key => $item)
-                                <li class="{{($key == 0 ? 'active' : '')}}">
-                                    <a data-toggle="tab" href="#{{$item->id}}">{{$item->titulo}}</a>
-                                </li>
-                            @endforeach                   
-                        </ul>
-                    <br/>
+        <section id="fotos"> 
+            <div class="light-wrapper">  
+                <div class="divide10"></div>
+                <div class="container inner scrolling-pagination">
+                    
+                    <div class="row">
+                        @php $count = 0; @endphp
+                        @foreach ($galerias as $key => $item)                
+                            @if($count == 4)
+                                </div><div class="divide10"></div><div class="row">
+                            @endif
 
-                    <div class="tab-content">                    
-                        @foreach ($galerias as $key => $galeria)
-                            <div id="{{$galeria->id}}" class="tab-pane fade in {{($key == 0 ? 'active' : '')}}"> 
-                                <div class="product "> 
-                                    <div class="row">
-                                        @if ($galeria->images()->get()->count())
-                                            @foreach ($galeria->images()->get() as $gb)
-                                                <div class="gallery_product col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
-                                                    <div class="wrap-box">
-                                                        <div class="box-img">
-                                                            <img src="{{ $gb->url_image }}" class="img img-responsive" alt="{{$galeria->titulo}}" title="{{$galeria->titulo}}">
-                                                        </div>
-                                                        <div class="gallery-box-main " title>
-                                                            <div class="gallery-icon">
-                                                                <a href="{{route('web.galeria',['slug' => $galeria->slug ])}}" title="{{$galeria->titulo}}"><i class="ion-ios-plus-empty" aria-hidden="true" ></i> </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
-                                    </div>
+                            <div class="col-sm-3" style="min-height:300px;">
+                                <div class="caption-overlay">
+                                    <figure style="margin-bottom:10px;">
+                                        <a class="fancybox-media" data-rel="{{$key}}" href="{{$item->cover()}}" rel="{{$key}}">
+                                            <img style="height:179px !important;" width="270" src="{{$item->cover()}}" alt="{{$item->titulo}}"> 
+                                        </a>
+                                    </figure>
+                                    <p style="text-align:center;">
+                                        <span style="text-transform: uppercase;"><strong>{{$item->titulo}}</strong></span><br />
+                                        {!!$item->content!!}
+                                    </p>
                                 </div>
-                            </div> 
+                            </div>
+                            @if ($item->images()->get()->count())
+                                @foreach($item->images()->get() as $imagem)
+                                    <a class="cbp-caption fancybox-media" data-rel="{{$key}}" href="{{ $imagem->url_image }}" rel="{{$key}}">
+                                        <img style="display:none;" src="{{ $imagem->url_image }}">
+                                    </a>
+                                @endforeach  
+                            @endif 
+                            @php $count++; @endphp
                         @endforeach
-                    </div>                    
-                </div>                
-            </div>            
-        </div>
-    @endif 
+                        {{$galerias->links()}} 
+                    </div>                             
+                </div>  
+            </div>  
+        </section>
+    @endif
 
 @endsection
 
 @section('css')
     <style>
-        .img{
-            width: 260px !important;
-            height: 169px !important;
+        .navbar {
+            background: rgba(29,29,33,0.8) !important;
+            height: 70px;
         }
     </style>
+@endsection
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
+<script>
+    // Paginação infinita
+    $('ul.pagination-custom').hide();
+    $(function() {
+        $('.scrolling-pagination').jscroll({
+            autoTrigger: true,
+            padding: 0,
+            nextSelector: '.pagination-custom li.active + li a',
+            contentSelector: 'div.scrolling-pagination',
+            callback: function() {
+                $('ul.pagination-custom').remove();
+            }
+        });
+    }); 
+</script>
 @endsection
