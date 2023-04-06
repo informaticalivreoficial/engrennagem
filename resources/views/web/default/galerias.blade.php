@@ -14,7 +14,6 @@
                             @if($count == 4)
                                 </div><div class="divide10"></div><div class="row">
                             @endif
-
                             <div class="col-sm-3" style="min-height:300px;">
                                 <div class="caption-overlay">
                                     <figure style="margin-bottom:10px;">
@@ -27,14 +26,14 @@
                                         {!!$item->content!!}
                                     </p>
                                 </div>
-                            </div>
-                            @if ($item->images()->get()->count())
-                                @foreach($item->images()->get() as $imagem)
-                                    <a class="cbp-caption fancybox-media" data-rel="{{$key}}" href="{{ $imagem->url_image }}" rel="{{$key}}">
-                                        <img style="display:none;" src="{{ $imagem->url_image }}">
-                                    </a>
-                                @endforeach  
-                            @endif 
+                                @if ($item->images()->get()->count())
+                                    @foreach($item->images()->get() as $imagem)
+                                        <a class="cbp-caption fancybox-media" data-rel="{{$key}}" href="{{ $imagem->url_image }}" rel="{{$key}}">
+                                            <img style="display:none;" src="{{ $imagem->url_image }}">
+                                        </a>
+                                    @endforeach  
+                                @endif 
+                            </div>                            
                             @php $count++; @endphp
                         @endforeach
                         {{$galerias->links()}} 
