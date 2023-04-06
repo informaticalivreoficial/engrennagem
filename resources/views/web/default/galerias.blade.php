@@ -11,7 +11,7 @@
                     <div class="row">
                         @php $count = 0; @endphp
                         @foreach ($galerias as $key => $item)                
-                            @if($key == 4)
+                            @if($count == 4)
                                 </div><div class="divide10"></div><div class="row">
                             @endif
                             <div class="col-sm-3" style="min-height:300px;">
@@ -34,10 +34,15 @@
                                     @endforeach  
                                 @endif 
                             </div>                            
-                            @php $key++; @endphp
+                            @php $count++; @endphp
                         @endforeach
-                        {{$galerias->links()}} 
-                    </div>                             
+                        
+                    </div>  
+                    <div class="row">
+                        <div class="col-12">
+                            {{$galerias->links()}} 
+                        </div>    
+                    </div>                           
                 </div>  
             </div>  
         </section>
@@ -51,24 +56,36 @@
             background: rgba(29,29,33,0.8) !important;
             height: 70px;
         }
+        .pagination-custom{
+            margin: 0;
+            display: -ms-flexbox;
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: 0.25rem;
+        }
+        .pagination-custom li a {
+            border-radius: 30px;
+            margin-right: 8px;
+            color:#7c7c7c;
+            border: 1px solid #ddd;
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            line-height: 25px;
+            font-weight: 600;
+        }
+        .pagination-custom>.active>a, .pagination-custom>.active>a:hover, .pagination-custom>li>a:hover {
+            color: #fff;
+            background: #007bff;
+            border: 1px solid transparent;
+        }
     </style>
 @endsection
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-<script>
-    // Paginação infinita
-    $('ul.pagination-custom').hide();
-    $(function() {
-        $('.scrolling-pagination').jscroll({
-            autoTrigger: true,
-            padding: 0,
-            nextSelector: '.pagination-custom li.active + li a',
-            contentSelector: 'div.scrolling-pagination',
-            callback: function() {
-                $('ul.pagination-custom').remove();
-            }
-        });
-    }); 
-</script>
+
 @endsection

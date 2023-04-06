@@ -155,7 +155,7 @@ class WebController extends Controller
 
     public function galerias()
     {
-        $galerias = Galeria::orderBy('created_at', 'DESC')->available()->paginate(8);
+        $galerias = Galeria::orderBy('created_at', 'DESC')->available()->paginate(16);
         
         $head = $this->seo->render('Galerias de Fotos - ' . $this->configService->getConfig()->nomedosite,
             'Galerias de Fotos',
