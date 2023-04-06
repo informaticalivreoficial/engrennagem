@@ -11,7 +11,7 @@
                     <div class="row">
                         @php $count = 0; @endphp
                         @foreach ($galerias as $key => $item)                
-                            @if($count == 4)
+                            @if($key == 4)
                                 </div><div class="divide10"></div><div class="row">
                             @endif
                             <div class="col-sm-3" style="min-height:300px;">
@@ -34,7 +34,7 @@
                                     @endforeach  
                                 @endif 
                             </div>                            
-                            @php $count++; @endphp
+                            @php $key++; @endphp
                         @endforeach
                         {{$galerias->links()}} 
                     </div>                             
