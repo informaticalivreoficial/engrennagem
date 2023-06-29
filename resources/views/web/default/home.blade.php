@@ -301,7 +301,7 @@
                                 <div class="col-sm-6 form_hide">
                                     <div class="form-field">
                                         <label>
-                                            <input type="email" name="email" placeholder="E-mail">
+                                            <input type="text" name="email" placeholder="E-mail">
                                         </label>
                                     </div>
                                 </div>
