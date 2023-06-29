@@ -258,11 +258,60 @@
     <div class="light-wrapper" style="background-image: url({{url('frontend/'.$configuracoes->template.'/assets/images/contact-bg.jpg')}});color:#000;background-repeat:no-repeat;background-size: cover;background-position:center;">  
         <div class="container inner">   
             <div class="divide10"></div>  
-            <div class="row">
-                <div class="col-sm-12" style="margin-bottom: 50px;"> 
-                    
-                </div>   
-            </div>
+            <div class="row" style="margin-bottom: 40px;">
+                <div class="col-sm-4" style="margin-bottom: 50px;"> 
+                    <h3 class="widget-title">Contato</h3>                    
+                    <div class="contact-info"> 
+                        @if ($configuracoes->telefone1)
+                            <i class="icon-phone"></i> {{$configuracoes->telefone1}}<br>
+                        @endif
+                        @if ($configuracoes->telefone2)
+                            <i class="icon-phone"></i> {{$configuracoes->telefone2}}<br>
+                        @endif
+                        @if ($configuracoes->telefone3)
+                            <i class="icon-phone"></i> {{$configuracoes->telefone3}}<br>
+                        @endif
+                        @if ($configuracoes->whatsapp)
+                            WhatsApp: {{$configuracoes->whatsapp}}<br>
+                        @endif
+                        @if ($configuracoes->email)
+                            <i class="icon-mail"></i> <a href="{{$configuracoes->email}}">{{$configuracoes->email}}</a><br>
+                        @endif
+                        @if ($configuracoes->email1)
+                            <i class="icon-mail"></i> <a href="{{$configuracoes->email1}}">{{$configuracoes->email1}}</a><br>
+                        @endif
+                    </div>                    
+                </div> 
+                <div class="col-sm-8">
+                    <div class="divide10"></div>
+                        <div class="form-container">
+                            <form action="" method="post" class="vanilla vanilla-form j_formsubmit" novalidate="novalidate">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div id="js-contact-result"></div>
+                                </div>
+                                <div class="col-sm-6 form_hide">
+                                    <div class="form-field">
+                                        <label>
+                                            <input type="text" name="nome" placeholder="Nome">
+                                        </label>
+                                    </div>                                
+                                </div>
+                                <div class="col-sm-6 form_hide">
+                                    <div class="form-field">
+                                        <label>
+                                            <input type="email" name="email" placeholder="E-mail">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <textarea name="mensagem" class="form_hide"></textarea>                        
+                            <input type="submit" class="btn btncheckout form_hide" value="Enviar Agora">
+                            </form>
+                        </div>                    
+                    </div>
+                </div>
   
             <div class="divide10"></div>
   
@@ -329,7 +378,7 @@
     </div>  
 </section> 
 
-
+{{--
 <div class="dialog">
     <div class="loadsistem">        
         <header class="dialog-topo">
@@ -395,6 +444,7 @@
         </fieldset>
     </div>
 </div> 
+--}}
 @endsection
 
 @section('css')
@@ -419,51 +469,89 @@
         //     });
         // });
 
-        $('.modalcadastro').click(function (){
-            $('.dialog').css('display','block');
-        });
+        // $('.modalcadastro').click(function (){
+        //     $('.dialog').css('display','block');
+        // });
         
-        $('.btnfechar').click(function (){
-            $('.dialog').modal().hide();
-        });
+        // $('.btnfechar').click(function (){
+        //     $('.dialog').modal().hide();
+        // });
 
         // Seletor, Evento/efeitos, CallBack, Ação
-        $('.j_formsubmit').submit(function (){
-            var form = $(this);
-            var dataString = $(form).serialize();
+        // $('.j_formsubmit').submit(function (){
+        //     var form = $(this);
+        //     var dataString = $(form).serialize();
 
-            $.ajax({
-                url: "{{ route('web.sendWhatsapp') }}",
-                data: dataString,
-                type: 'GET',
-                dataType: 'JSON',
-                beforeSend: function(){
-                    form.find(".btncheckout").attr("disabled", true);
-                    form.find('.btncheckout').html("Carregando...");                
-                    form.find('.alert').fadeOut(500, function(){
-                        $(this).remove();
-                    });
-                },
-                success: function(resposta){
-                    $('html, body').animate({scrollTop:$('#js-contact-result').offset().top-100}, 'slow');
-                    if(resposta.error){
-                        form.find('#js-contact-result').html('<div class="alert alert-danger error-msg">'+ resposta.error +'</div>');
-                        form.find('.error-msg').fadeIn();                    
-                    }else{
-                        form.find('#js-contact-result').html('<div class="alert alert-success error-msg">'+ resposta.sucess +'</div>');
-                        form.find('.error-msg').fadeIn();                    
-                        form.find('input[class!="noclear"]').val('');
-                        form.find('textarea[class!="noclear"]').val('');
-                        form.find('.form_hide').fadeOut(500);
+        //     $.ajax({
+        //         url: "{{ route('web.sendWhatsapp') }}",
+        //         data: dataString,
+        //         type: 'GET',
+        //         dataType: 'JSON',
+        //         beforeSend: function(){
+        //             form.find(".btncheckout").attr("disabled", true);
+        //             form.find('.btncheckout').html("Carregando...");                
+        //             form.find('.alert').fadeOut(500, function(){
+        //                 $(this).remove();
+        //             });
+        //         },
+        //         success: function(resposta){
+        //             $('html, body').animate({scrollTop:$('#js-contact-result').offset().top-100}, 'slow');
+        //             if(resposta.error){
+        //                 form.find('#js-contact-result').html('<div class="alert alert-danger error-msg">'+ resposta.error +'</div>');
+        //                 form.find('.error-msg').fadeIn();                    
+        //             }else{
+        //                 form.find('#js-contact-result').html('<div class="alert alert-success error-msg">'+ resposta.sucess +'</div>');
+        //                 form.find('.error-msg').fadeIn();                    
+        //                 form.find('input[class!="noclear"]').val('');
+        //                 form.find('textarea[class!="noclear"]').val('');
+        //                 form.find('.form_hide').fadeOut(500);
+        //             }
+        //         },
+        //         complete: function(resposta){
+        //             form.find(".btncheckout").attr("disabled", false);
+        //             form.find('.btncheckout').html("Cadastrar Agora &nbsp;<strong>:)</strong>");                                
+        //         }
+        //     });
+        //     return false;
+        // });
+
+        $('.j_formsubmit').submit(function (){
+                var form = $(this);
+                var dataString = $(form).serialize();
+
+                $.ajax({
+                    url: "{{ route('web.sendEmail') }}",
+                    data: dataString,
+                    type: 'GET',
+                    dataType: 'JSON',
+                    beforeSend: function(){
+                        $(".btncheckout").attr("disabled", true);
+                        $('.btncheckout').val("Carregando...");                
+                        $('.alert').fadeOut(500, function(){
+                            $(this).remove();
+                        });
+                    },
+                    success: function(resposta){
+                        $('html, body').animate({scrollTop:$('#js-contact-result').offset().top-100}, 'slow');
+                        if(resposta.error){
+                            $('#js-contact-result').html('<div class="alert alert-danger error-msg">'+ resposta.error +'</div>');
+                            $('.error-msg').fadeIn();                    
+                        }else{
+                            $('#js-contact-result').html('<div class="alert alert-success error-msg">'+ resposta.sucess +'</div>');
+                            $('.error-msg').fadeIn();                    
+                            $('input[class!="noclear"]').val('');
+                            $('textarea[class!="noclear"]').val('');
+                            $('.form_hide').fadeOut(500);
+                        }
+                    },
+                    complete: function(resposta){
+                        $(".btncheckout").attr("disabled", false);
+                        $('.btncheckout').val("Enviar Agora");                                
                     }
-                },
-                complete: function(resposta){
-                    form.find(".btncheckout").attr("disabled", false);
-                    form.find('.btncheckout').html("Cadastrar Agora &nbsp;<strong>:)</strong>");                                
-                }
+                });
+
+                return false;
             });
-            return false;
-        });
 
     });
    
