@@ -38,19 +38,19 @@ class AdminController extends Controller
         $eventoAvailable = Agenda::available()->count();
         $eventoUnavailable = Agenda::unavailable()->count();
         //Analitcs
-        $visitasHoje = Analytics::fetchMostVisitedPages(Period::days(1));
-        $visitas365 = Analytics::fetchTotalVisitorsAndPageViews(Period::months(5));
-        $top_browser = Analytics::fetchTopBrowsers(Period::months(5));
+        // $visitasHoje = Analytics::fetchMostVisitedPages(Period::days(1));
+        // $visitas365 = Analytics::fetchTotalVisitorsAndPageViews(Period::months(5));
+        // $top_browser = Analytics::fetchTopBrowsers(Period::months(5));
 
         
-        $analyticsData = Analytics::performQuery(
-            Period::months(5),
-               'ga:sessions',
-               [
-                   'metrics' => 'ga:sessions, ga:visitors, ga:pageviews',
-                   'dimensions' => 'ga:yearMonth'
-               ]
-         );         
+        // $analyticsData = Analytics::performQuery(
+        //     Period::months(5),
+        //        'ga:sessions',
+        //        [
+        //            'metrics' => 'ga:sessions, ga:visitors, ga:pageviews',
+        //            'dimensions' => 'ga:yearMonth'
+        //        ]
+        //  );         
         
         return view('admin.dashboard',[
             //Newsletter
@@ -73,10 +73,10 @@ class AdminController extends Controller
             'galeriasImages' => $galeriasImages,
             
             //Analytics
-            'visitasHoje' => $visitasHoje,
+            //'visitasHoje' => $visitasHoje,
             //'visitas365' => $visitas365,
-            'analyticsData' => $analyticsData,
-            'top_browser' => $top_browser
+            //'analyticsData' => $analyticsData,
+            //'top_browser' => $top_browser
         ]);
     }
 }
